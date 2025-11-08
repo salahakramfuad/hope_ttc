@@ -1,0 +1,299 @@
+/* Tailwind (v4) */
+@import 'tailwindcss';
+
+/* =========================
+   CSS Variables & Theme Tokens
+   ========================= */
+:root {
+  /* Light theme tokens */
+  --background: #ffffff;
+  --foreground: #11181c;
+  --muted: rgba(17, 24, 28, 0.6);
+  --surface: #f7f9fa;
+  --border: rgba(0, 0, 0, 0.12);
+  --tint: #0a7ea4;
+  --primary: #3f6d85;
+  --ring: #95c6e2;
+
+  /* Typography (wired to Next fonts if you set them) */
+  --font-sans: var(
+    --font-geist-sans,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Apple Color Emoji',
+    'Segoe UI Emoji'
+  );
+  --font-mono: var(
+    --font-geist-mono,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    'Liberation Mono',
+    'Courier New'
+  );
+
+  /* Radius */
+  --radius: 12px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Dark mode via class (preferred for Next.js) */
+:root.dark {
+  --background: #0d1117;
+  --foreground: #e6eef2;
+  --muted: rgba(230, 238, 242, 0.65);
+  --surface: #111827;
+  --border: rgba(255, 255, 255, 0.12);
+  --tint: #95c6e2;
+  --primary: #95c6e2;
+  --ring: #2563eb;
+}
+
+/* Also hint the UA for proper form/scrollbar color in dark mode if user prefers it */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light dark; /* non-breaking hint */
+  }
+}
+
+/* Tailwind theme map (tokens -> Tailwind design system) */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-tint: var(--tint);
+  --color-primary: var(--primary);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-lg: var(--radius);
+}
+
+/* =========================
+   Base Resets & Elements
+   ========================= */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html,
+  body,
+  #__next {
+    height: 100%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    @apply antialiased;
+  }
+
+  /* Typography defaults */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-extrabold tracking-tight;
+    line-height: 1.15;
+  }
+  h1 {
+    @apply text-3xl sm:text-4xl md:text-5xl;
+  }
+  h2 {
+    @apply text-2xl sm:text-3xl;
+  }
+  h3 {
+    @apply text-xl sm:text-2xl;
+  }
+
+  p {
+    @apply leading-7;
+    color: var(--foreground);
+  }
+  small,
+  .muted {
+    color: var(--muted);
+  }
+
+  a {
+    color: var(--tint);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Borders map to token */
+  :where(*, *::before, *::after) {
+    border-color: var(--border);
+  }
+
+  /* Focus ring (keyboard accessible) */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Text selection */
+  ::selection {
+    background: color-mix(in oklab, var(--tint) 35%, transparent);
+    color: var(--foreground);
+  }
+
+  /* Images/videos scale nicely */
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* =========================
+   Components Layer
+   ========================= */
+@layer components {
+  /* App container */
+  .container-app {
+    @apply mx-auto px-4;
+    max-width: 1120px;
+  }
+
+  /* Card */
+  .card {
+    @apply rounded-2xl shadow-sm transition-shadow;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .card:hover {
+    @apply shadow-md;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-2xl font-medium transition;
+    background: var(--primary);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.05);
+  }
+  .btn-primary:active {
+    transform: translateY(1px);
+  }
+  .btn-primary:focus-visible {
+    outline-color: var(--ring);
+  }
+
+  /* Subtle (surface) button */
+  .btn-surface {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-2xl font-medium transition border;
+    background: var(--surface);
+    color: var(--foreground);
+  }
+  .btn-surface:hover {
+    filter: brightness(1.02);
+  }
+}
+
+/* =========================
+   Utilities Layer
+   ========================= */
+@layer utilities {
+  /* Gradient headline helper */
+  .headline-gradient {
+    background-image: linear-gradient(90deg, var(--primary), var(--tint));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  }
+
+  /* Hairline divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border),
+      transparent
+    );
+  }
+
+  /* Soft shadow */
+  .shadow-soft {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Nice scrollbars */
+  .scroll-smooth {
+    scrollbar-gutter: stable both-edges;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--foreground) 20%, transparent);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Motion-safe transitions */
+  .transition-soft {
+    transition: all 0.25s var(--ease);
+  }
+}
+
+/* =========================
+   Reduced Motion Friendly
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* globals.css */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
