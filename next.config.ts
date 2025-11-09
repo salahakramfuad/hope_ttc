@@ -4,7 +4,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'picsum.photos', pathname: '/**' }
     ],
     formats: ['image/avif', 'image/webp']
-  }
+  },
+  transpilePackages: ['@vis.gl/react-maplibre', 'maplibre-gl']
 }
 export default nextConfig
-// If using CommonJS: module.exports = nextConfig
