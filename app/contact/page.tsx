@@ -127,11 +127,9 @@ export default function ContactPage() {
                 Hours &amp; Rating
               </h2>
               <p className='mt-1 text-gray-700 text-sm sm:text-base'>
-                Open now
+                Sunday - Thursday (8:00 am - 3:00 pm)
               </p>
-              <p className='text-gray-500 text-xs sm:text-sm'>
-                Not yet rated (2 Reviews)
-              </p>
+              <p className='text-gray-500 text-xs sm:text-sm'>Not yet rated</p>
               <p className='mt-3 text-gray-500 text-xs sm:text-sm'>
                 Page · Test Preparation Center
               </p>
