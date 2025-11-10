@@ -48,8 +48,8 @@ export default function Nav() {
       {
         title: 'Courses',
         subLinks: [
-          { title: 'IELTS', href: '/ielts' },
-          { title: 'SAT', href: '/sat' },
+          { title: 'IELTS', href: '/courses/ielts' },
+          { title: 'SAT', href: '/courses/sat' },
           { title: 'Spoken English', href: '/spoken-english' },
           { title: 'Robotics', href: '/robotics' },
           { title: 'Bio Tech', href: '/biotech' }
