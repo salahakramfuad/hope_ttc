@@ -50,13 +50,14 @@ export default function Nav() {
         subLinks: [
           { title: 'IELTS', href: '/ielts' },
           { title: 'SAT', href: '/sat' },
-          { title: 'Spoken English', href: '/spoken-english' }
+          { title: 'Spoken English', href: '/spoken-english' },
+          { title: 'Robotics', href: '/robotics' },
+          { title: 'Bio Tech', href: '/biotech' }
         ]
       },
-      { title: 'Study Abroad', href: '/study_abroad' },
-      { title: 'Admissions', href: '/admission' },
-      { title: 'About', href: '/about' },
-      { title: 'Contact', href: '/contact' }
+      { title: 'Study Overseas', href: '/StudyOverseas' },
+      { title: 'Get Enrolled', href: '/getEnrolled' },
+      { title: 'Contact Us', href: '/contact' }
     ],
     []
   )
@@ -245,15 +246,14 @@ export default function Nav() {
                 )
               })}
 
-              {/* CTA */}
-              <li className='ml-1'>
+              {/* <li className='ml-1'>
                 <Link
                   href='/admission/apply'
                   className='inline-flex items-center justify-center rounded-xl px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 no-underline hover:no-underline focus:no-underline'
                 >
                   Apply Now
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -309,7 +309,7 @@ export default function Nav() {
           >
             <div className='flex h-full flex-col'>
               {/* Drawer header */}
-              <div className='px-4 pb-3 sticky top-0 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-black/10 z-10'>
+              <div className='px-4 pb-3 sticky top-0 bg-white/95 backdrop-blur supports-backdrop-filter:bg-white/80 border-b border-black/10 z-10'>
                 <div className='flex items-center justify-between py-2'>
                   <span className='font-semibold text-gray-900'>Menu</span>
                   <button
@@ -416,6 +416,7 @@ export default function Nav() {
                       )}
                     </div>
                   ))}
+                  {/*
                   <Link
                     href='/'
                     onClick={() => setIsDrawerOpen(false)}
@@ -423,6 +424,7 @@ export default function Nav() {
                   >
                     Apply Now
                   </Link>
+                  */}
                 </nav>
               </div>
             </div>
