@@ -297,7 +297,7 @@ export default function Nav() {
             id='mobile-drawer'
             ref={drawerRef}
             className={classNames(
-              'fixed inset-y-0 right-0 z-[90] w-4/5 max-w-sm transform bg-white shadow-2xl transition-transform duration-200 lg:hidden',
+              'fixed inset-y-0 right-0 z-[90] w-4/5 max-w-sm transform bg-purple-50 shadow-2xl transition-transform duration-200 lg:hidden',
               'h-dvh max-h-dvh overflow-hidden',
               'pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
               isDrawerOpen ? 'translate-x-0' : 'translate-x-full'
@@ -384,7 +384,7 @@ export default function Nav() {
                                   href={sub.href}
                                   onClick={() => setIsDrawerOpen(false)}
                                   className={classNames(
-                                    'block p-2 text-sm rounded-md no-underline hover:no-underline focus:no-underline',
+                                    'block p-2 text-sm rounded-md no-underline hover:no-underline focus:no-underline text-indigo-800',
                                     activeSub
                                       ? 'text-indigo-800 bg-indigo-50'
                                       : 'hover:bg-indigo-50 text-gray-800'
