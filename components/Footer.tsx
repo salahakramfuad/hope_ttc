@@ -140,29 +140,20 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/study_abroad'
+                    href='/studyOverseas'
                     className='hover:underline hover:decoration-2'
                     style={{ textDecorationColor: BRAND.base }}
                   >
-                    Study Abroad
+                    Study Overseas
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href='/admission'
+                    href='/getEnrolled'
                     className='hover:underline hover:decoration-2'
                     style={{ textDecorationColor: BRAND.base }}
                   >
-                    Admissions
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/about'
-                    className='hover:underline hover:decoration-2'
-                    style={{ textDecorationColor: BRAND.base }}
-                  >
-                    About
+                    Get Enrolled
                   </Link>
                 </li>
                 <li>
@@ -171,7 +162,7 @@ export default function Footer() {
                     className='hover:underline hover:decoration-2'
                     style={{ textDecorationColor: BRAND.base }}
                   >
-                    Contact
+                    Contact Us
                   </Link>
                 </li>
               </ul>
@@ -184,7 +175,7 @@ export default function Footer() {
               <ul className='mt-4 space-y-2 text-gray-700'>
                 <li>
                   <Link
-                    href='/itels'
+                    href='/courses/ielts'
                     className='hover:underline hover:decoration-2'
                     style={{ textDecorationColor: BRAND.base }}
                   >
@@ -193,7 +184,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/sat'
+                    href='/courses/sat'
                     className='hover:underline hover:decoration-2'
                     style={{ textDecorationColor: BRAND.base }}
                   >
@@ -202,11 +193,29 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/spokenEnglish'
+                    href='/courses/spokenenglish'
                     className='hover:underline hover:decoration-2'
                     style={{ textDecorationColor: BRAND.base }}
                   >
                     Spoken English
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/courses/robotics'
+                    className='hover:underline hover:decoration-2'
+                    style={{ textDecorationColor: BRAND.base }}
+                  >
+                    Robotics
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href='/courses/biotech'
+                    className='hover:underline hover:decoration-2'
+                    style={{ textDecorationColor: BRAND.base }}
+                  >
+                    Biotech
                   </Link>
                 </li>
               </ul>
