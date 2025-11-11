@@ -89,7 +89,7 @@ const plans: Plan[] = [
 
 export default function SATPage() {
   return (
-    <main className='min-h-screen bg-white text-[15px]'>
+    <main className='min-h-screen bg-purple-50 text-[15px]'>
       {/* HERO */}
       <section className='relative isolate'>
         <div className='absolute inset-0 -z-10 overflow-hidden rounded-b-[28px]'>
