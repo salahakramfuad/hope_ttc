@@ -332,11 +332,8 @@ function HeroIllustration() {
 export default function HomePage() {
   return (
     <main className='bg-linear-to-b from-pink-50 to-purple-50 text-slate-900'>
-      {/* Top accent bar */}
-      <div className='h-1 w-full bg-linear-to-r from-teal-500 via-sky-500 to-indigo-500' />
-
       {/* Hero Section */}
-      <section className='relative overflow-hidden bg-pink-100 bg-no-repeat bg-cover '>
+      <section className='relative overflow-hidden mt-0 bg-pink-100'>
         <div className='absolute inset-0 -z-10'>
           <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,var(--tw-gradient-stops))],_var(--tw-gradient-stops))] from-teal-50 via-transparent to-transparent opacity-70' />
           <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-indigo-50 via-transparent to-transparent opacity-70' />
