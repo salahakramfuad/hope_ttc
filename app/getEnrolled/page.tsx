@@ -1,0 +1,317 @@
+// app/get-enrolled/page.tsx
+'use client'
+
+import React from 'react'
+import Link from 'next/link'
+
+export default function GetEnrolledPage() {
+  const [submitted, setSubmitted] = React.useState(false)
+
+  return (
+    <main className='min-h-screen bg-linear-to-b from-purple-50 to-sky-100'>
+      {/* Hero */}
+      <section className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12'>
+        <div className='text-center'>
+          <span className='inline-block rounded-full bg-sky-50 border border-sky-200 text-sky-700 px-4 py-1.5 text-xs font-semibold tracking-wider uppercase shadow-sm'>
+            Admissions
+          </span>
+          <h1 className='mt-4 text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent'>
+            Get Enrolled
+          </h1>
+          <p className='mt-3 text-slate-600 max-w-2xl mx-auto'>
+            Ready to take the next step? Fill in this quick form and our
+            advisors will reach out with a tailored plan.
+          </p>
+        </div>
+
+        {/* Grid */}
+        <div className='mt-10 grid gap-6 lg:grid-cols-3'>
+          {/* Form Card */}
+          <section className='lg:col-span-2'>
+            {/* Success banner */}
+            {submitted && (
+              <div className='mb-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-800'>
+                <div className='flex items-start gap-3'>
+                  <span className='mt-0.5'>✅</span>
+                  <div>
+                    <div className='font-semibold'>
+                      Thanks! We’ve got your details.
+                    </div>
+                    <div className='text-sm'>
+                      Our team will contact you soon via your preferred channel.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className='rounded-2xl bg-white shadow-md border border-sky-100 p-6 md:p-8'>
+              <h2 className='text-xl font-semibold text-slate-900'>
+                Tell us about you
+              </h2>
+              <p className='text-sm text-slate-600 mt-1'>
+                Fields marked <span className='text-sky-600'>*</span> are
+                required.
+              </p>
+
+              <form
+                className='mt-6 space-y-5'
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  const form = e.currentTarget as HTMLFormElement
+                  const fd = new FormData(form)
+                  // TODO: send fd to your API route or webhook here.
+                  form.reset()
+                  setSubmitted(true)
+                }}
+              >
+                {/* Name / Email */}
+                <div className='grid sm:grid-cols-2 gap-4'>
+                  <div>
+                    <label
+                      className='block font-medium text-slate-700 mb-1'
+                      htmlFor='name'
+                    >
+                      Full Name <span className='text-sky-600'>*</span>
+                    </label>
+                    <input
+                      className='w-full border border-sky-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-400'
+                      type='text'
+                      id='name'
+                      name='name'
+                      required
+                      placeholder='Your Name'
+                      autoComplete='name'
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className='block font-medium text-slate-700 mb-1'
+                      htmlFor='email'
+                    >
+                      Email Address <span className='text-sky-600'>*</span>
+                    </label>
+                    <input
+                      className='w-full border border-sky-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-400'
+                      type='email'
+                      id='email'
+                      name='email'
+                      required
+                      placeholder='you@example.com'
+                      autoComplete='email'
+                    />
+                  </div>
+                </div>
+
+                {/* Phone / Preferred Contact */}
+                <div className='grid sm:grid-cols-2 gap-4'>
+                  <div>
+                    <label
+                      className='block font-medium text-slate-700 mb-1'
+                      htmlFor='phone'
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      className='w-full border border-sky-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-400'
+                      type='tel'
+                      id='phone'
+                      name='phone'
+                      placeholder='01XXXXXXXXX'
+                      inputMode='tel'
+                      pattern='^0[0-9]{10}$'
+                      aria-describedby='phone-hint'
+                      autoComplete='tel'
+                    />
+                    <p id='phone-hint' className='text-xs text-slate-500 mt-1'>
+                      Bangladeshi mobile format. Example: 01XXXXXXXXX
+                    </p>
+                  </div>
+
+                  <div>
+                    <label
+                      className='block font-medium text-slate-700 mb-1'
+                      htmlFor='contactPref'
+                    >
+                      Preferred Contact
+                    </label>
+                    <select
+                      className='w-full border border-sky-200 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-sky-400'
+                      id='contactPref'
+                      name='contactPref'
+                      defaultValue='whatsapp'
+                    >
+                      <option value='whatsapp'>WhatsApp</option>
+                      <option value='phone'>Phone Call</option>
+                      <option value='email'>Email</option>
+                      <option value='sms'>SMS</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Program / Campus */}
+                <div className='grid sm:grid-cols-2 gap-4'>
+                  <div>
+                    <label
+                      className='block font-medium text-slate-700 mb-1'
+                      htmlFor='program'
+                    >
+                      Program of Interest{' '}
+                      <span className='text-sky-600'>*</span>
+                    </label>
+                    <select
+                      className='w-full border border-sky-200 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-sky-400'
+                      id='program'
+                      name='program'
+                      required
+                      defaultValue=''
+                    >
+                      <option value='' disabled>
+                        Select a program
+                      </option>
+                      <option>IELTS</option>
+                      <option>SAT</option>
+                      <option>Spoken English</option>
+                      <option>Robotics</option>
+                      <option>BTEC</option>
+                      <option>Study Overseas</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      className='block font-medium text-slate-700 mb-1'
+                      htmlFor='campus'
+                    >
+                      Preferred Campus
+                    </label>
+                    <select
+                      className='w-full border border-sky-200 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-sky-400'
+                      id='campus'
+                      name='campus'
+                      defaultValue='uttara'
+                    >
+                      <option value='uttara'>Uttara</option>
+                      <option value='dhanmondi'>Dhanmondi</option>
+                      <option value='online'>Online</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label
+                    className='block font-medium text-slate-700 mb-1'
+                    htmlFor='message'
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    className='w-full border border-sky-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-400'
+                    id='message'
+                    name='message'
+                    rows={4}
+                    placeholder="Tell us anything else you'd like us to know..."
+                  />
+                </div>
+
+                {/* Consent */}
+                <div className='rounded-xl border border-sky-100 bg-sky-50/60 p-4'>
+                  <label className='flex items-start gap-3'>
+                    <input
+                      type='checkbox'
+                      name='consent'
+                      required
+                      className='mt-1 h-4 w-4 rounded border-slate-300 text-sky-600 focus:ring-sky-500'
+                    />
+                    <span className='text-sm text-slate-700'>
+                      I agree to be contacted by HOPE TTC about admissions and
+                      programs.{' '}
+                      <Link href='/privacy' className='text-sky-700 underline'>
+                        Privacy Policy
+                      </Link>
+                      .<span className='text-sky-600'> *</span>
+                    </span>
+                  </label>
+                </div>
+
+                <button
+                  type='submit'
+                  className='w-full mt-2 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-semibold py-3 rounded-xl shadow-sm transition'
+                >
+                  Submit Enquiry
+                </button>
+
+                <p className='text-center text-slate-500 text-xs'>
+                  We respect your privacy. Our team will contact you to assist
+                  further.
+                </p>
+              </form>
+            </div>
+          </section>
+
+          {/* Sidebar Info */}
+          <aside className='space-y-6'>
+            <div className='rounded-2xl bg-white shadow-md border border-sky-100 p-6'>
+              <h3 className='font-semibold text-slate-900'>Need quick help?</h3>
+              <p className='text-sm text-slate-600 mt-1'>
+                Talk to an advisor now or book a free consultation.
+              </p>
+
+              <div className='mt-4 grid gap-3'>
+                <a
+                  href='https://wa.me/8801949308141'
+                  className='inline-flex items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-2 text-emerald-800 font-medium hover:bg-emerald-100 transition'
+                >
+                  WhatsApp
+                </a>
+                <a
+                  href='tel:+8801949308141'
+                  className='inline-flex items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-4 py-2 text-sky-800 font-medium hover:bg-sky-100 transition'
+                >
+                  Call Us
+                </a>
+                <Link
+                  href='/interested/form/combo-ielts-express'
+                  className='inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2 text-slate-800 font-medium hover:bg-slate-50 transition'
+                >
+                  Free Consultation
+                </Link>
+              </div>
+            </div>
+
+            <div className='rounded-2xl bg-white shadow-md border border-sky-100 p-6'>
+              <h3 className='font-semibold text-slate-900'>
+                Visit our campuses
+              </h3>
+              <ul className='mt-3 space-y-3 text-sm text-slate-700'>
+                <li>
+                  <div className='font-medium text-slate-900'>Uttara</div>
+                  Plot-7, Road-6, Sector-4, Uttara, Dhaka
+                </li>
+                <li>
+                  <div className='font-medium text-slate-900'>Dhanmondi</div>
+                  House-12, Road-5, Dhanmondi, Dhaka
+                </li>
+              </ul>
+              <div className='mt-4 text-xs text-slate-500'>
+                Open: Sat–Thu, 10:00–20:00 (BDT)
+              </div>
+            </div>
+
+            <div className='rounded-2xl bg-gradient-to-br from-sky-50 to-teal-50 border border-sky-100 p-6'>
+              <h3 className='font-semibold text-slate-900'>
+                What happens next?
+              </h3>
+              <ol className='mt-2 space-y-2 text-sm text-slate-700 list-decimal list-inside'>
+                <li>We review your details within 1 business day.</li>
+                <li>Advisor contacts you to discuss goals and timing.</li>
+                <li>Get a tailored plan + batch options.</li>
+              </ol>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  )
+}

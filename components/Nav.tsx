@@ -50,12 +50,12 @@ export default function Nav() {
         subLinks: [
           { title: 'IELTS', href: '/courses/ielts' },
           { title: 'SAT', href: '/courses/sat' },
-          { title: 'Spoken English', href: '/spoken-english' },
-          { title: 'Robotics', href: '/robotics' },
-          { title: 'Bio Tech', href: '/biotech' }
+          { title: 'Spoken English', href: '/courses/spokenenglish' },
+          { title: 'Robotics', href: '/courses/robotics' },
+          { title: 'Bio Tech', href: '/courses/biotech' }
         ]
       },
-      { title: 'Study Overseas', href: '/StudyOverseas' },
+      { title: 'Study Overseas', href: '/studyOverseas' },
       { title: 'Get Enrolled', href: '/getEnrolled' },
       { title: 'Contact Us', href: '/contact' }
     ],
@@ -113,7 +113,7 @@ export default function Nav() {
       className={classNames(
         inter.variable,
         poppins.variable,
-        'sticky top-0 z-[70] backdrop-blur supports-[backdrop-filter]:bg-white/80 bg-white/95 border-b'
+        'sticky top-0 z-70 bg-purple-50 backdrop-blur  border-black/10 border-b'
       )}
       style={{ borderColor: 'rgba(17,24,39,0.12)' }}
     >

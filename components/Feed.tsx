@@ -1,17 +1,16 @@
 // app/page.tsx
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { faker } from '@faker-js/faker'
 
 /**
- * Elegant, light-first theme (no pure black)
- * Soft off-white background, white cards, slate ink, teal/indigo accents
- * SSR-safe: no client event handlers in server components
+ * Enhanced elegant educational landing page
+ * Soft color palette with teal/sky/indigo accents
  */
 
-// ---- Faker helpers (deterministic pretty placeholders) ----
-/** Stable integer hash from a string (for deterministic seeds). */
+// ---- Faker helpers ----
 function seedFromString(s: string) {
   let h = 2166136261 >>> 0
   for (let i = 0; i < s.length; i++) {
@@ -21,7 +20,6 @@ function seedFromString(s: string) {
   return h >>> 0
 }
 
-/** Education-friendly placeholder using faker (picsum). */
 function fakerPlaceholder(alt: string, width: number, height: number) {
   const seed = seedFromString(alt || `${width}x${height}`)
   faker.seed(seed)
@@ -119,7 +117,7 @@ const TESTIMONIALS = [
   }
 ]
 
-/* ---------- Small UI ---------- */
+/* ---------- UI Components ---------- */
 
 function SectionTitle({
   eyebrow,
@@ -142,19 +140,19 @@ function SectionTitle({
   return (
     <header className='mx-auto max-w-4xl text-center'>
       {eyebrow && (
-        <span className='inline-block rounded-full bg-white border border-teal-100 text-teal-700 px-3 py-1 text-[10px] font-semibold tracking-widest uppercase'>
+        <span className='inline-block rounded-full bg-linear-to-r from-teal-50 to-sky-50 border border-teal-200/50 text-teal-700 px-4 py-1.5 text-xs font-semibold tracking-wider uppercase shadow-sm'>
           {eyebrow}
         </span>
       )}
       <h2
-        className={`mt-3 font-extrabold tracking-tight leading-tight ${sizeMap[size]}`}
+        className={`mt-4 font-bold tracking-tight leading-tight ${sizeMap[size]} bg-linear-to-r from-teal-700 via-sky-700 to-indigo-700 bg-clip-text text-transparent`}
       >
-        <span className='bg-linear-to-r from-teal-700 via-sky-700 to-indigo-700 bg-clip-text text-transparent'>
-          {title}
-        </span>
+        {title}
       </h2>
       {desc && (
-        <p className='mt-3 text-base md:text-lg text-slate-600'>{desc}</p>
+        <p className='mt-4 text-base md:text-lg text-slate-600 leading-relaxed'>
+          {desc}
+        </p>
       )}
     </header>
   )
@@ -169,14 +167,13 @@ function Card({
 }) {
   return (
     <div
-      className={`rounded-3xl border border-slate-200 bg-white shadow-sm transition-transform duration-200 will-change-transform hover:-translate-y-0.5 hover:shadow-md ${className}`}
+      className={`rounded-2xl border border-slate-200/60 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${className}`}
     >
       {children}
     </div>
   )
 }
 
-/** SSR-safe image. If `src` is missing OR preferPlaceholder is true, use faker picsum. */
 function SafeImage({
   src,
   alt,
@@ -185,8 +182,6 @@ function SafeImage({
   height,
   sizes,
   priority = false,
-  placeholder = 'blur',
-  blurDataURL,
   preferPlaceholder = false
 }: {
   src?: string
@@ -196,15 +191,13 @@ function SafeImage({
   height: number
   sizes?: string
   priority?: boolean
-  placeholder?: 'blur' | 'empty'
-  blurDataURL?: string
-  /** Force using generated placeholder even if a src string is provided. */
   preferPlaceholder?: boolean
 }) {
   const finalSrc =
     preferPlaceholder || !src ? fakerPlaceholder(alt, width, height) : src
   const defaultBlur =
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII='
+
   return (
     <Image
       src={finalSrc}
@@ -214,133 +207,301 @@ function SafeImage({
       height={height}
       sizes={sizes}
       priority={priority}
-      placeholder={placeholder}
-      blurDataURL={blurDataURL || defaultBlur}
+      placeholder='blur'
+      blurDataURL={defaultBlur}
     />
   )
 }
 
-/* --------------------------------- Page ---------------------------------- */
-
-export default function Feed() {
+function HeroIllustration() {
   return (
-    <main className='bg-[#F7FAFC] text-slate-900 scroll-smooth'>
-      {/* Soft top ribbon for subtle polish */}
-      <div className='h-2 w-full bg-linear-to-r from-teal-200 via-sky-200 to-indigo-200' />
+    <div className='relative w-full h-full min-h-[400px]'>
+      <style jsx>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        @keyframes floatDelayed {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-15px);
+          }
+        }
+        .float-1 {
+          animation: float 3s ease-in-out infinite;
+        }
+        .float-2 {
+          animation: floatDelayed 3.5s ease-in-out infinite;
+        }
+      `}</style>
 
-      {/* ============================ FULL-WIDTH HERO ============================ */}
-      <section className='relative w-full overflow-hidden'>
-        {/* Ambient background */}
-        <div className='absolute inset-0 -z-10'>
-          <div className='h-full w-full bg-[radial-gradient(900px_500px_at_10%_-10%,#E6F6F7_25%,transparent_70%),radial-gradient(900px_600px_at_110%_10%,#E7ECFB_25%,transparent_70%),linear-gradient(180deg,#F4FAFF_0%,transparent_50%)]' />
+      {/* Floating cards */}
+      <div className='absolute top-8 right-12 float-1'>
+        <div className='rounded-xl bg-white shadow-lg p-4 border border-teal-100 max-w-[200px]'>
+          <div className='flex items-center gap-2 mb-2'>
+            <div className='w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-lg'>
+              📚
+            </div>
+            <span className='text-sm font-semibold text-slate-800'>
+              Live Classes
+            </span>
+          </div>
+          <p className='text-xs text-slate-600'>
+            Interactive sessions with expert tutors
+          </p>
         </div>
-        {/* Subtle grid */}
+      </div>
+
+      <div className='absolute top-32 right-4 float-2'>
+        <div className='rounded-xl bg-white shadow-lg p-4 border border-sky-100 max-w-[180px]'>
+          <div className='flex items-center gap-2 mb-2'>
+            <div className='w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-lg'>
+              🎯
+            </div>
+            <span className='text-sm font-semibold text-slate-800'>
+              Mock Tests
+            </span>
+          </div>
+          <p className='text-xs text-slate-600'>Real exam simulation</p>
+        </div>
+      </div>
+
+      <div className='absolute top-56 right-20 float-1'>
+        <div className='rounded-xl bg-white shadow-lg p-4 border border-indigo-100 max-w-[190px]'>
+          <div className='flex items-center gap-2 mb-2'>
+            <div className='w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-lg'>
+              ✈️
+            </div>
+            <span className='text-sm font-semibold text-slate-800'>
+              Study Abroad
+            </span>
+          </div>
+          <p className='text-xs text-slate-600'>Complete guidance & support</p>
+        </div>
+      </div>
+
+      {/* Central illustration */}
+      <div className='absolute inset-0 flex items-center justify-center'>
+        <svg viewBox='0 0 400 400' className='w-full h-full max-w-md'>
+          <defs>
+            <linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='100%'>
+              <stop offset='0%' stopColor='#0d9488' stopOpacity='0.1' />
+              <stop offset='100%' stopColor='#6366f1' stopOpacity='0.1' />
+            </linearGradient>
+          </defs>
+
+          <circle cx='200' cy='200' r='120' fill='url(#grad1)' />
+          <path
+            d='M150 160 L150 240 L250 240 L250 160 Z'
+            fill='#0d9488'
+            opacity='0.2'
+          />
+          <path
+            d='M160 170 L160 230 L240 230 L240 170 Z'
+            fill='white'
+            stroke='#0d9488'
+            strokeWidth='2'
+          />
+          <line
+            x1='200'
+            y1='170'
+            x2='200'
+            y2='230'
+            stroke='#0d9488'
+            strokeWidth='2'
+          />
+          <circle cx='280' cy='150' r='8' fill='#0d9488' opacity='0.3' />
+          <circle cx='120' cy='180' r='6' fill='#0ea5e9' opacity='0.3' />
+          <circle cx='290' cy='250' r='7' fill='#6366f1' opacity='0.3' />
+        </svg>
+      </div>
+    </div>
+  )
+}
+
+/* ---------- Main Page ---------- */
+
+export default function HomePage() {
+  return (
+    <main className='bg-linear-to-b from-pink-50 to-purple-50 text-slate-900'>
+      {/* Top accent bar */}
+      <div className='h-1 w-full bg-linear-to-r from-teal-500 via-sky-500 to-indigo-500' />
+
+      {/* Hero Section */}
+      <section className='relative overflow-hidden bg-pink-100 bg-no-repeat bg-cover '>
+        <div className='absolute inset-0 -z-10'>
+          <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,var(--tw-gradient-stops))],_var(--tw-gradient-stops))] from-teal-50 via-transparent to-transparent opacity-70' />
+          <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-indigo-50 via-transparent to-transparent opacity-70' />
+          <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,var(--tw-gradient-stops))] from-sky-50 via-transparent to-transparent opacity-50' />
+        </div>
+
         <div
-          aria-hidden
-          className='absolute inset-0 -z-10 opacity-[0.05]'
+          className='absolute inset-0 -z-10 opacity-[0.03]'
           style={{
             backgroundImage:
-              'linear-gradient(to right, #1e293b 1px, transparent 1px), linear-gradient(to bottom, #1e293b 1px, transparent 1px)',
-            backgroundSize: '48px 48px'
+              'radial-gradient(circle at 1px 1px, rgb(15 23 42) 1px, transparent 0)',
+            backgroundSize: '40px 40px'
           }}
         />
 
-        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-28 grid lg:grid-cols-12 gap-12 items-center'>
-          {/* Copy */}
-          <div className='lg:col-span-6'>
-            <span className='inline-block rounded-full bg-white border border-teal-100 text-teal-700 px-3 py-1 text-[10px] font-semibold tracking-widest uppercase'>
-              New Batches Opening
-            </span>
-            <h1 className='mt-4 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight'>
-              <span className='bg-linear-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent'>
-                Get Your Band 7+ Faster
-              </span>
-            </h1>
-            <p className='mt-5 text-lg md:text-xl text-slate-600'>
-              Intensive IELTS prep, speaking clinics, and IDP-aligned mocks.
-              Study with mentors who’ve guided thousands to top scores.
-            </p>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-32'>
+          <div className='grid lg:grid-cols-2 gap-12 items-center'>
+            {/* Left Column */}
+            <div className='space-y-8'>
+              <div className='inline-flex items-center gap-2 rounded-full bg-white border border-teal-200/50 px-4 py-2 shadow-sm'>
+                <div className='w-2 h-2 rounded-full bg-teal-500 animate-pulse' />
+                <span className='text-sm font-medium text-slate-700'>
+                  Bangladesh Premier IELTS Institute
+                </span>
+              </div>
 
-            <div className='mt-7 flex flex-wrap gap-3'>
-              <Link
-                href='/courses/ielts-express'
-                className='inline-flex items-center justify-center rounded-2xl px-6 py-3.5 text-sm font-semibold text-white shadow-sm hover:opacity-95 bg-teal-700'
-              >
-                Explore Courses
-              </Link>
-              <Link
-                href='/contact-us'
-                className='inline-flex items-center justify-center rounded-2xl px-6 py-3.5 text-sm font-semibold border border-teal-200 bg-white hover:bg-teal-50'
-              >
-                Talk to an Advisor
-              </Link>
+              <div>
+                <h1 className='text-5xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tight'>
+                  <span className='block bg-linear-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent'>
+                    Build Skills.
+                  </span>
+                  <span className='block bg-linear-to-r from-teal-600 to-sky-600 bg-clip-text text-transparent mt-2'>
+                    Break Barriers.
+                  </span>
+                  <span className='block bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mt-2'>
+                    Go Global.
+                  </span>
+                </h1>
+
+                <p className='mt-6 text-lg md:text-xl text-slate-600 leading-relaxed'>
+                  Master{' '}
+                  <span className='font-semibold text-teal-700'>
+                    Spoken English
+                  </span>
+                  , ace the{' '}
+                  <span className='font-semibold text-sky-700'>IELTS</span>,
+                  prepare for{' '}
+                  <span className='font-semibold text-indigo-700'>SAT</span>,
+                  explore{' '}
+                  <span className='font-semibold text-purple-700'>
+                    Robotics & BTEC
+                  </span>
+                  , and achieve your{' '}
+                  <span className='font-semibold text-slate-800'>
+                    Study Abroad
+                  </span>{' '}
+                  dreams.
+                </p>
+              </div>
+
+              <div className='flex flex-wrap gap-4'>
+                <Link
+                  href='/interested/form/combo-ielts-express'
+                  className='group inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-white bg-linear-to-r from-teal-600 to-sky-600 hover:from-teal-700 hover:to-sky-700 shadow-lg hover:shadow-xl transition-all duration-300'
+                >
+                  Book Free Consultation
+                  <span className='group-hover:translate-x-1 transition-transform'>
+                    →
+                  </span>
+                </Link>
+                <Link
+                  href='/courses'
+                  className='inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-slate-700 bg-white border-2 border-slate-200 hover:border-teal-300 hover:bg-slate-50 shadow-sm hover:shadow transition-all duration-300'
+                >
+                  Explore Courses
+                </Link>
+              </div>
+
+              <div className='grid grid-cols-4 gap-4 pt-4'>
+                {HIGHLIGHTS.map((h) => (
+                  <div key={h.k} className='text-center'>
+                    <div className='text-2xl md:text-3xl font-bold bg-linear-to-r from-teal-600 to-sky-600 bg-clip-text text-transparent'>
+                      {h.v}
+                    </div>
+                    <div className='text-xs text-slate-600 mt-1'>{h.k}</div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Metrics */}
-            <div className='mt-9 grid grid-cols-2 sm:grid-cols-4 gap-4'>
-              {HIGHLIGHTS.map((h) => (
-                <Card key={h.k} className='p-5 text-center'>
-                  <div className='text-2xl font-semibold'>{h.v}</div>
-                  <div className='text-xs text-slate-500'>{h.k}</div>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Visual */}
-          <div className='lg:col-span-6'>
-            <div className='relative aspect-4/3 rounded-[28px] overflow-hidden border border-slate-200 bg-white'>
-              <div className='absolute inset-0 opacity-60 bg-[radial-gradient(60%_60%_at_70%_20%,#E6F6F7,transparent_70%)]' />
-              <SafeImage
-                src='/images/hero.jpg'
-                alt='Learners in class'
-                className='h-full w-full object-cover'
-                width={1200}
-                height={900}
-                sizes='(max-width: 1024px) 100vw, 50vw'
-                priority
-                preferPlaceholder
-              />
-              <div
-                className='pointer-events-none absolute inset-0'
-                style={{ boxShadow: 'inset 0 0 140px rgba(10,126,164,0.12)' }}
-              />
+            {/* Right Column */}
+            <div className='lg:pl-8'>
+              <div className='relative'>
+                <div className='absolute inset-0 bg-linear-to-br from-teal-100 to-indigo-100 rounded-3xl transform rotate-3 opacity-20' />
+                <div className='relative bg-white/40 backdrop-blur-sm rounded-3xl border border-white/60 shadow-2xl p-8'>
+                  <HeroIllustration />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ============================== COURSES =============================== */}
-      <section className='py-16 md:py-24'>
+      {/* Trust Bar */}
+      <section className='py-12 border-y border-slate-200 bg-white/50'>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60'>
+            <div className='text-sm font-semibold text-slate-600'>
+              Trusted by 10,000+ Students
+            </div>
+            <div className='w-px h-8 bg-slate-300' />
+            <div className='text-sm font-semibold text-slate-600'>
+              IDP Certified
+            </div>
+            <div className='w-px h-8 bg-slate-300' />
+            <div className='text-sm font-semibold text-slate-600'>
+              16+ Years Experience
+            </div>
+            <div className='w-px h-8 bg-slate-300' />
+            <div className='text-sm font-semibold text-slate-600'>
+              2 Modern Campuses
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Courses */}
+      <section className='py-20 md:py-28'>
         <SectionTitle
-          eyebrow='Programs'
-          title='Choose Your Track'
-          desc='From absolute beginners to band-8 chasers — pick a course that matches your goal.'
+          eyebrow='Our Programs'
+          title='Choose Your Learning Path'
+          desc='From absolute beginners to band-8 achievers — discover courses designed for your goals.'
           size='lg'
         />
-        <div className='mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-7'>
+        <div className='mx-auto mt-16 max-w-7xl px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6'>
           {COURSES.map((c) => (
             <Link key={c.title} href={c.href} className='group'>
               <Card className='h-full overflow-hidden'>
-                <div className='relative'>
+                <div className='relative overflow-hidden'>
                   <SafeImage
                     src={c.img}
                     alt={c.title}
-                    className='h-48 w-full object-cover'
-                    width={960}
-                    height={384}
+                    className='h-52 w-full object-cover transition-transform duration-500 group-hover:scale-110'
+                    width={400}
+                    height={300}
                     sizes='(max-width: 1024px) 100vw, 25vw'
                     preferPlaceholder
                   />
-                  <span className='absolute top-3 left-3 rounded-md bg-white/90 backdrop-blur px-2.5 py-1 text-[11px] font-medium text-teal-800 border border-teal-100'>
+                  <div className='absolute inset-0 bg-linear-to-t from-black/40 to-transparent' />
+                  <span className='absolute top-4 left-4 rounded-lg bg-white/95 backdrop-blur px-3 py-1.5 text-xs font-semibold text-teal-700 shadow-sm'>
                     {c.level}
                   </span>
                 </div>
                 <div className='p-6'>
-                  <h3 className='font-semibold text-slate-900'>{c.title}</h3>
-                  <p className='mt-2 text-sm text-slate-600'>{c.blurb}</p>
-                  <div className='mt-4 text-sm font-semibold text-teal-700 group-hover:underline'>
-                    View details →
+                  <h3 className='font-bold text-lg text-slate-900 group-hover:text-teal-700 transition-colors'>
+                    {c.title}
+                  </h3>
+                  <p className='mt-2 text-sm text-slate-600 leading-relaxed'>
+                    {c.blurb}
+                  </p>
+                  <div className='mt-4 text-sm font-semibold text-teal-600 group-hover:text-teal-700 flex items-center gap-1'>
+                    Learn more
+                    <span className='group-hover:translate-x-1 transition-transform'>
+                      →
+                    </span>
                   </div>
                 </div>
               </Card>
@@ -349,115 +510,143 @@ export default function Feed() {
         </div>
       </section>
 
-      {/* ============================== FEATURES ============================== */}
-      <section className='py-16 md:py-24 bg-[#F2F6F9]'>
+      {/* Features */}
+      <section className='py-20 md:py-28 bg-linear-to-b from-slate-50 to-white'>
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <SectionTitle
-            eyebrow='Why Us'
-            title='Designed for Real-World Results'
-            desc='Practical practice, fast feedback, and a clear path to your target band.'
-            size='md'
+            eyebrow='Why Choose Us'
+            title='Excellence in Every Detail'
+            desc='Real-world practice, personalized feedback, and proven methodologies for your success.'
+            size='lg'
           />
-          <div className='mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-7'>
+          <div className='mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6'>
             {FEATURES.map((f) => (
-              <Card key={f.title} className='p-6'>
-                <div
-                  className='h-10 w-10 rounded-full bg-teal-50 border border-teal-100 flex items-center justify-center text-lg'
-                  aria-hidden
-                >
+              <Card
+                key={f.title}
+                className='p-7 hover:border-teal-200 transition-colors'
+              >
+                <div className='h-14 w-14 rounded-2xl bg-linear-to-br from-teal-50 to-sky-50 border border-teal-100 flex items-center justify-center text-2xl shadow-sm'>
                   {f.icon}
                 </div>
-                <h3 className='mt-3 font-semibold text-slate-900'>{f.title}</h3>
-                <p className='mt-2 text-sm text-slate-600'>{f.desc}</p>
+                <h3 className='mt-5 font-bold text-lg text-slate-900'>
+                  {f.title}
+                </h3>
+                <p className='mt-3 text-sm text-slate-600 leading-relaxed'>
+                  {f.desc}
+                </p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ========================= WHY HOPE TTC (BIGGER) ========================= */}
-      <section className='py-16 md:py-28'>
+      {/* Why HOPE TTC */}
+      <section className='py-20 md:py-32 relative overflow-hidden'>
+        <div className='absolute inset-0 bg-linear-to-b from-white via-teal-50/30 to-white -z-10' />
+
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <SectionTitle
-            eyebrow='Why HOPE TTC'
-            title={
-              <>
-                <span>Why is HOPE TTC</span>
-                <span className=''>the #1 Choice</span>
-                <span className=''>for IELTS in Bangladesh?</span>
-              </>
-            }
-            desc='Beyond teaching, we provide personalized progress tracking, AI-integrated assessment tools, and an exclusive IELTS Portal.'
+            eyebrow='What Sets Us Apart'
+            title='The HOPE TTC Advantage'
+            desc='Advanced technology meets personalized attention for exceptional IELTS results.'
             size='xl'
           />
-          <div className='mt-14 grid gap-8 lg:grid-cols-12'>
-            {/* Left: value bullets */}
-            <div className='lg:col-span-7 grid sm:grid-cols-2 gap-8'>
-              <Card className='p-7'>
-                <h3 className='font-semibold text-lg'>
-                  Personalized Progress Tracking
-                </h3>
-                <p className='mt-2 text-sm text-slate-600'>
-                  A dashboard that visualizes your band trajectory across
-                  Listening, Reading, Writing, and Speaking—with weekly
-                  milestones and coach notes.
-                </p>
+
+          <div className='mt-20 grid gap-10 lg:grid-cols-2'>
+            <div className='space-y-6'>
+              <Card className='p-8 hover:shadow-xl transition-shadow'>
+                <div className='flex items-start gap-4'>
+                  <div className='shrink-0 w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-xl'>
+                    📊
+                  </div>
+                  <div>
+                    <h3 className='font-bold text-lg mb-2'>
+                      Personalized Progress Tracking
+                    </h3>
+                    <p className='text-sm text-slate-600 leading-relaxed'>
+                      Real-time dashboards visualizing your journey across all
+                      four skills with weekly milestones and expert feedback.
+                    </p>
+                  </div>
+                </div>
               </Card>
-              <Card className='p-7'>
-                <h3 className='font-semibold text-lg'>
-                  AI-Integrated Assessments
-                </h3>
-                <p className='mt-2 text-sm text-slate-600'>
-                  Instant analytic feedback on coherence, grammar, and lexical
-                  range, aligned to band descriptors—so you know what to fix
-                  now.
-                </p>
+
+              <Card className='p-8 hover:shadow-xl transition-shadow'>
+                <div className='flex items-start gap-4'>
+                  <div className='shrink-0 w-12 h-12 rounded-xl bg-sky-100 flex items-center justify-center text-xl'>
+                    🤖
+                  </div>
+                  <div>
+                    <h3 className='font-bold text-lg mb-2'>
+                      AI-Powered Assessments
+                    </h3>
+                    <p className='text-sm text-slate-600 leading-relaxed'>
+                      Instant analytics on grammar, coherence, and vocabulary
+                      aligned with official band descriptors.
+                    </p>
+                  </div>
+                </div>
               </Card>
-              <Card className='p-7'>
-                <h3 className='font-semibold text-lg'>
-                  Exclusive IELTS Portal
-                </h3>
-                <p className='mt-2 text-sm text-slate-600'>
-                  Access mocks, model answers, cue-card banks, and timed drills
-                  in one secure place—available 24/7 from any device.
-                </p>
-              </Card>
-              <Card className='p-7'>
-                <h3 className='font-semibold text-lg'>
-                  Actionable Weekly Reports
-                </h3>
-                <p className='mt-2 text-sm text-slate-600'>
-                  Concise summaries that connect your errors to practice tasks
-                  and set next-week goals you can actually hit.
-                </p>
+
+              <Card className='p-8 hover:shadow-xl transition-shadow'>
+                <div className='flex items-start gap-4'>
+                  <div className='shrink-0 w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-xl'>
+                    🌐
+                  </div>
+                  <div>
+                    <h3 className='font-bold text-lg mb-2'>
+                      Exclusive IELTS Portal
+                    </h3>
+                    <p className='text-sm text-slate-600 leading-relaxed'>
+                      24/7 access to mocks, model answers, cue-card banks, and
+                      personalized study materials.
+                    </p>
+                  </div>
+                </div>
               </Card>
             </div>
 
-            {/* Right: visual callout */}
-            <div className='lg:col-span-5'>
-              <Card className='p-6 h-full'>
-                <div className='relative aspect-4/3 rounded-2xl overflow-hidden border border-slate-200 bg-white'>
+            <div className='lg:pl-8'>
+              <Card className='p-8 h-full bg-linear-to-br from-teal-50 to-sky-50 border-teal-200/50'>
+                <div className='aspect-video rounded-xl overflow-hidden border border-white/60 shadow-lg mb-6'>
                   <SafeImage
                     src='/images/portal-preview.jpg'
-                    alt='HOPE TTC IELTS Portal preview'
-                    className='h-full w-full object-cover'
-                    width={960}
-                    height={720}
-                    sizes='(max-width:1024px) 100vw, 40vw'
+                    alt='HOPE TTC IELTS Portal'
+                    className='w-full h-full object-cover'
+                    width={600}
+                    height={400}
+                    sizes='(max-width: 1024px) 100vw, 50vw'
                     preferPlaceholder
                   />
                 </div>
-                <ul className='mt-5 space-y-2 text-sm text-slate-600'>
-                  <li>• Timed mocks with band analytics</li>
-                  <li>• Speaking cue-card tracker with voice notes</li>
-                  <li>• Writing Task 1/2 libraries and checklists</li>
+                <h3 className='text-xl font-bold mb-4'>
+                  Your Complete IELTS Command Center
+                </h3>
+                <ul className='space-y-3 text-sm text-slate-700'>
+                  <li className='flex items-center gap-2'>
+                    <span className='text-teal-600'>✓</span> Timed mock tests
+                    with instant band analytics
+                  </li>
+                  <li className='flex items-center gap-2'>
+                    <span className='text-teal-600'>✓</span> Speaking practice
+                    with AI feedback & voice recording
+                  </li>
+                  <li className='flex items-center gap-2'>
+                    <span className='text-teal-600'>✓</span> Writing Task 1 & 2
+                    model libraries
+                  </li>
+                  <li className='flex items-center gap-2'>
+                    <span className='text-teal-600'>✓</span> Progress tracking
+                    across all four skills
+                  </li>
                 </ul>
-                <div className='mt-6'>
+                <div className='mt-8'>
                   <Link
                     href='/portal'
-                    className='inline-flex items-center rounded-xl px-5 py-2.5 text-sm font-semibold text-white bg-teal-700 hover:opacity-95'
+                    className='inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white bg-linear-to-r from-teal-600 to-sky-600 hover:shadow-lg transition-all'
                   >
-                    Explore the IELTS Portal
+                    Explore Portal
+                    <span>→</span>
                   </Link>
                 </div>
               </Card>
@@ -466,104 +655,308 @@ export default function Feed() {
         </div>
       </section>
 
-      {/* ============================ TESTIMONIALS ============================ */}
-      <section className='py-16 md:py-24'>
+      {/* Testimonials */}
+      <section className='py-20 md:py-28'>
         <SectionTitle
-          eyebrow='Success Stories'
-          title='From First Class to Test Day'
-          desc='What our learners say after finishing their course and mocks.'
+          eyebrow='Student Success'
+          title='Real Results, Real Stories'
+          desc='Hear from students who achieved their dream scores with HOPE TTC.'
           size='lg'
         />
-        <div className='mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-7'>
+        <div className='mx-auto mt-16 max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6'>
           {TESTIMONIALS.map((t) => (
-            <Card key={t.name} className='p-6'>
-              <div className='flex items-center gap-3'>
+            <Card
+              key={t.name}
+              className='p-8 hover:shadow-xl transition-shadow'
+            >
+              <div className='flex items-center gap-4 mb-4'>
                 <SafeImage
                   src={t.img}
                   alt={t.name}
-                  className='h-12 w-12 rounded-full object-cover'
-                  width={48}
-                  height={48}
+                  className='h-14 w-14 rounded-full object-cover ring-2 ring-teal-100'
+                  width={56}
+                  height={56}
                   preferPlaceholder
                 />
                 <div>
-                  <div className='text-sm font-semibold'>{t.name}</div>
-                  <div className='text-xs text-slate-500'>{t.score}</div>
+                  <div className='font-bold text-slate-900'>{t.name}</div>
+                  <div className='text-sm font-semibold text-teal-600'>
+                    {t.score}
+                  </div>
                 </div>
               </div>
-              <p className='mt-3 text-sm text-slate-600'>“{t.quote}”</p>
+              <p className='text-sm text-slate-600 leading-relaxed italic'>
+                `&quot;`
+              </p>
             </Card>
           ))}
         </div>
       </section>
 
-      {/* ================================= FAQ ================================= */}
-      <section className='py-16 md:py-24 bg-[#F2F6F9]'>
+      {/* FAQ */}
+      <section className='py-20 md:py-28 bg-linear-to-b from-slate-50 to-white'>
         <SectionTitle
-          eyebrow='FAQ'
-          title='Answers Before You Enroll'
-          desc='If you still have questions, message our advisors any time.'
+          eyebrow='Common Questions'
+          title='Everything You Need to Know'
+          desc='Still have questions? Our advisors are here to help anytime.'
           size='md'
         />
-        <div className='mx-auto mt-10 max-w-3xl px-4 sm:px-6 lg:px-8 divide-y rounded-3xl border border-slate-200 bg-white'>
+        <div className='mx-auto mt-12 max-w-3xl px-4 sm:px-6 lg:px-8'>
+          <div className='divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden'>
+            {[
+              {
+                q: 'Do you offer mock tests?',
+                a: 'Yes — weekly IDP-style mocks with band descriptors and detailed feedback from certified examiners.'
+              },
+              {
+                q: 'Can I switch batches?',
+                a: 'Absolutely. If your schedule changes, we help you shift to another batch with no additional fees.'
+              },
+              {
+                q: 'Is there a speaking clinic?',
+                a: 'Yes — personalized one-to-one sessions focusing on fluency, coherence, pronunciation, and confidence building.'
+              },
+              {
+                q: 'Do you provide study abroad support?',
+                a: 'Yes — from shortlisting to applications, SOPs, and visa guidance via our Study Abroad Desk.'
+              },
+              {
+                q: 'Are classes available online?',
+                a: 'We run both on-campus and live online cohorts. Choose what suits your routine best.'
+              }
+            ].map((item, i) => (
+              <details key={i} className='group'>
+                <summary className='cursor-pointer list-none p-6 font-semibold flex items-center justify-between hover:bg-slate-50 transition-colors'>
+                  <span className='text-slate-900'>{item.q}</span>
+                  <span className='text-2xl text-teal-600 leading-none group-open:rotate-45 transition-transform duration-300'>
+                    +
+                  </span>
+                </summary>
+                <div className='px-6 pb-6 text-sm text-slate-600 leading-relaxed'>
+                  {item.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Campuses */}
+      <section className='py-20 md:py-28'>
+        <SectionTitle
+          eyebrow='Visit Us'
+          title='Modern Campuses in Dhaka'
+          desc='Bright classrooms, speaking labs, and dedicated mock centers.'
+          size='lg'
+        />
+        <div className='mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6'>
           {[
             {
-              q: 'Do you offer mock tests?',
-              a: 'Yes — weekly IDP-style mocks with band descriptors and detailed feedback.'
+              name: 'Uttara Campus',
+              addr: 'Plot 7, Road 6, Sector 4, Uttara, Dhaka',
+              imgAlt: 'Uttara Campus',
+              img: '/images/campus-uttara.jpg'
             },
             {
-              q: 'Can I switch batches?',
-              a: 'Absolutely. If your schedule changes, we help you shift to another batch.'
-            },
-            {
-              q: 'Is there a speaking clinic?',
-              a: 'Yes — one-to-one sessions focusing on fluency, coherence, and pronunciation.'
+              name: 'Dhanmondi Campus',
+              addr: 'House 12, Road 5, Dhanmondi, Dhaka',
+              imgAlt: 'Dhanmondi Campus',
+              img: '/images/campus-dhanmondi.jpg'
             }
-          ].map((item, i) => (
-            <details key={i} className='group open:bg-transparent'>
-              <summary className='cursor-pointer list-none p-5 font-medium flex items-center justify-between'>
-                <span>{item.q}</span>
-                <span className='text-xl leading-none group-open:rotate-45 transition'>
-                  +
-                </span>
-              </summary>
-              <div className='px-5 pb-5 text-sm text-slate-600'>{item.a}</div>
-              {i < 2 && <hr className='border-t border-slate-200' />}
-            </details>
+          ].map((c) => (
+            <Card key={c.name} className='overflow-hidden'>
+              <div className='aspect-video'>
+                <SafeImage
+                  src={c.img}
+                  alt={c.imgAlt}
+                  className='w-full h-full object-cover'
+                  width={800}
+                  height={450}
+                  sizes='(max-width: 1024px) 100vw, 50vw'
+                  preferPlaceholder
+                />
+              </div>
+              <div className='p-6'>
+                <h3 className='font-bold text-lg text-slate-900'>{c.name}</h3>
+                <p className='mt-1 text-sm text-slate-600'>{c.addr}</p>
+              </div>
+            </Card>
           ))}
         </div>
       </section>
 
-      {/* ================================= CTA ================================= */}
-      <section className='py-16 md:py-24'>
-        <div className='mx-auto max-w-5xl px-4 sm:px-6 lg:px-8'>
-          <Card className='p-10 md:p-12 text-center'>
-            <h3 className='text-3xl md:text-4xl font-extrabold tracking-tight'>
-              Ready to start your IELTS journey?
-            </h3>
-            <p className='mt-4 text-base md:text-lg text-slate-600'>
-              Book a free consultation and get your personalized study plan.
-            </p>
-            <div className='mt-7 flex flex-wrap justify-center gap-3'>
+      {/* CTA Banner */}
+      <section className='py-16'>
+        <div className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
+          <div className='rounded-3xl border border-teal-200/50 bg-linear-to-r from-teal-50 to-sky-50 p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6'>
+            <div>
+              <h3 className='text-2xl md:text-3xl font-bold text-slate-900'>
+                Ready to aim for Band 7+?
+              </h3>
+              <p className='mt-2 text-slate-700'>
+                Get a personalized study plan and a free diagnostic in your
+                first session.
+              </p>
+            </div>
+            <div className='flex gap-3'>
               <Link
-                href='/interested/form/combo-ielts-express'
-                className='rounded-2xl px-6 py-3.5 text-sm font-semibold text-white hover:opacity-95 shadow-sm bg-teal-700'
+                href='/apply'
+                className='inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white bg-linear-to-r from-teal-600 to-sky-600 shadow hover:shadow-md transition-all'
               >
-                Book a Free Call
+                Apply Now
               </Link>
               <Link
-                href='/ielts-dates'
-                className='rounded-2xl px-6 py-3.5 text-sm font-semibold border border-teal-200 bg-white hover:bg-teal-50'
+                href='/contact'
+                className='inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-teal-700 bg-white border border-teal-200 hover:bg-teal-50'
               >
-                Check Exam Dates
+                Contact Us
               </Link>
             </div>
-          </Card>
+          </div>
         </div>
       </section>
 
-      {/* Soft bottom ribbon */}
-      <div className='h-2 w-full bg-linear-to-r from-indigo-200 via-sky-200 to-teal-200' />
+      {/* Contact Strip */}
+      <section className='py-10 border-t border-slate-200 bg-white/60'>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-6 md:grid-cols-3'>
+          <div className='rounded-2xl border border-slate-200 bg-white p-6'>
+            <div className='text-sm font-semibold text-slate-500'>Email</div>
+            <Link
+              href='mailto:info@hopettc.com'
+              className='mt-1 block text-slate-900 font-medium hover:text-teal-700'
+            >
+              info@hopettc.com
+            </Link>
+          </div>
+          <div className='rounded-2xl border border-slate-200 bg-white p-6'>
+            <div className='text-sm font-semibold text-slate-500'>Phone</div>
+            <Link
+              href='tel:+8801949308141'
+              className='mt-1 block text-slate-900 font-medium hover:text-teal-700'
+            >
+              +880 1949-308141
+            </Link>
+          </div>
+          <div className='rounded-2xl border border-slate-200 bg-white p-6'>
+            <div className='text-sm font-semibold text-slate-500'>Address</div>
+            <div className='mt-1 text-slate-900 font-medium'>
+              Plot-7, Road-6, Sector-4, Uttara, Dhaka
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className='py-12 bg-white'>
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='grid gap-8 md:grid-cols-4'>
+            <div>
+              <div className='text-lg font-bold text-slate-900'>HOPE TTC</div>
+              <p className='mt-2 text-sm text-slate-600 max-w-xs'>
+                International standard training & testing center — IELTS, spoken
+                English, SAT and more.
+              </p>
+            </div>
+            <div>
+              <div className='text-sm font-semibold text-slate-900'>
+                Programs
+              </div>
+              <ul className='mt-3 space-y-2 text-sm'>
+                <li>
+                  <Link
+                    className='text-slate-600 hover:text-teal-700'
+                    href='/courses/ielts-express'
+                  >
+                    IELTS Express
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className='text-slate-600 hover:text-teal-700'
+                    href='/courses/ielts-foundation'
+                  >
+                    IELTS Foundation
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className='text-slate-600 hover:text-teal-700'
+                    href='/speaking/basic-english-spoken'
+                  >
+                    Spoken English
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className='text-slate-600 hover:text-teal-700'
+                    href='/courses/writing-masterclass'
+                  >
+                    Essay Masterclass
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div className='text-sm font-semibold text-slate-900'>
+                Company
+              </div>
+              <ul className='mt-3 space-y-2 text-sm'>
+                <li>
+                  <Link
+                    className='text-slate-600 hover:text-teal-700'
+                    href='/about'
+                  >
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className='text-slate-600 hover:text-teal-700'
+                    href='/contact'
+                  >
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className='text-slate-600 hover:text-teal-700'
+                    href='/admissions'
+                  >
+                    Admissions
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className='text-slate-600 hover:text-teal-700'
+                    href='/policies'
+                  >
+                    Policies
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div className='text-sm font-semibold text-slate-900'>
+                Get Started
+              </div>
+              <div className='mt-3 flex flex-col gap-2'>
+                <Link
+                  href='/apply'
+                  className='inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold text-white bg-linear-to-r from-teal-600 to-sky-600'
+                >
+                  Apply Now
+                </Link>
+                <Link
+                  href='/interested/form/combo-ielts-express'
+                  className='inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold text-teal-700 bg-white border border-teal-200 hover:bg-teal-50'
+                >
+                  Free Consultation
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
   )
 }
