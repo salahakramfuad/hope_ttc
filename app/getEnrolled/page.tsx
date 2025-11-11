@@ -15,7 +15,7 @@ export default function GetEnrolledPage() {
           <span className='inline-block rounded-full bg-sky-50 border border-sky-200 text-sky-700 px-4 py-1.5 text-xs font-semibold tracking-wider uppercase shadow-sm'>
             Admissions
           </span>
-          <h1 className='mt-4 text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent'>
+          <h1 className='mt-4 text-4xl md:text-5xl font-bold tracking-tight bg-linear-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent'>
             Get Enrolled
           </h1>
           <p className='mt-3 text-slate-600 max-w-2xl mx-auto'>
@@ -237,7 +237,7 @@ export default function GetEnrolledPage() {
 
                 <button
                   type='submit'
-                  className='w-full mt-2 bg-gradient-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-semibold py-3 rounded-xl shadow-sm transition'
+                  className='w-full mt-2 bg-linear-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-semibold py-3 rounded-xl shadow-sm transition'
                 >
                   Submit Enquiry
                 </button>

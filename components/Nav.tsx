@@ -290,14 +290,14 @@ export default function Nav() {
           <button
             aria-label='Close menu'
             onClick={() => setIsDrawerOpen(false)}
-            className='fixed inset-0 z-[80] bg-black/40 backdrop-blur-sm transition-opacity lg:hidden'
+            className='fixed inset-0 z-80 bg-black/40 backdrop-blur-sm transition-opacity lg:hidden'
             type='button'
           />
           <aside
             id='mobile-drawer'
             ref={drawerRef}
             className={classNames(
-              'fixed inset-y-0 right-0 z-[90] w-4/5 max-w-sm transform bg-purple-50 shadow-2xl transition-transform duration-200 lg:hidden',
+              'fixed inset-y-0 right-0 z-90 w-4/5 max-w-sm transform bg-purple-50 shadow-2xl transition-transform duration-200 lg:hidden',
               'h-dvh max-h-dvh overflow-hidden',
               'pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
               isDrawerOpen ? 'translate-x-0' : 'translate-x-full'

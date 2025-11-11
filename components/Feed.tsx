@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { faker } from '@faker-js/faker'
+import HeroIllustration from './fun/animatedcard'
 
 /**
  * Enhanced elegant educational landing page
@@ -213,148 +214,20 @@ function SafeImage({
   )
 }
 
-function HeroIllustration() {
-  return (
-    <div className='relative w-full h-full min-h-[400px]'>
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-        @keyframes floatDelayed {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-15px);
-          }
-        }
-        .float-1 {
-          animation: float 3s ease-in-out infinite;
-        }
-        .float-2 {
-          animation: floatDelayed 3.5s ease-in-out infinite;
-        }
-      `}</style>
-
-      {/* Floating cards */}
-      <div className='absolute top-8 right-12 float-1'>
-        <div className='rounded-xl bg-white shadow-lg p-4 border border-teal-100 max-w-[200px]'>
-          <div className='flex items-center gap-2 mb-2'>
-            <div className='w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center text-lg'>
-              📚
-            </div>
-            <span className='text-sm font-semibold text-slate-800'>
-              Live Classes
-            </span>
-          </div>
-          <p className='text-xs text-slate-600'>
-            Interactive sessions with expert tutors
-          </p>
-        </div>
-      </div>
-
-      <div className='absolute top-32 right-4 float-2'>
-        <div className='rounded-xl bg-white shadow-lg p-4 border border-sky-100 max-w-[180px]'>
-          <div className='flex items-center gap-2 mb-2'>
-            <div className='w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-lg'>
-              🎯
-            </div>
-            <span className='text-sm font-semibold text-slate-800'>
-              Mock Tests
-            </span>
-          </div>
-          <p className='text-xs text-slate-600'>Real exam simulation</p>
-        </div>
-      </div>
-
-      <div className='absolute top-56 right-20 float-1'>
-        <div className='rounded-xl bg-white shadow-lg p-4 border border-indigo-100 max-w-[190px]'>
-          <div className='flex items-center gap-2 mb-2'>
-            <div className='w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-lg'>
-              ✈️
-            </div>
-            <span className='text-sm font-semibold text-slate-800'>
-              Study Abroad
-            </span>
-          </div>
-          <p className='text-xs text-slate-600'>Complete guidance & support</p>
-        </div>
-      </div>
-
-      {/* Central illustration */}
-      <div className='absolute inset-0 flex items-center justify-center'>
-        <svg viewBox='0 0 400 400' className='w-full h-full max-w-md'>
-          <defs>
-            <linearGradient id='grad1' x1='0%' y1='0%' x2='100%' y2='100%'>
-              <stop offset='0%' stopColor='#0d9488' stopOpacity='0.1' />
-              <stop offset='100%' stopColor='#6366f1' stopOpacity='0.1' />
-            </linearGradient>
-          </defs>
-
-          <circle cx='200' cy='200' r='120' fill='url(#grad1)' />
-          <path
-            d='M150 160 L150 240 L250 240 L250 160 Z'
-            fill='#0d9488'
-            opacity='0.2'
-          />
-          <path
-            d='M160 170 L160 230 L240 230 L240 170 Z'
-            fill='white'
-            stroke='#0d9488'
-            strokeWidth='2'
-          />
-          <line
-            x1='200'
-            y1='170'
-            x2='200'
-            y2='230'
-            stroke='#0d9488'
-            strokeWidth='2'
-          />
-          <circle cx='280' cy='150' r='8' fill='#0d9488' opacity='0.3' />
-          <circle cx='120' cy='180' r='6' fill='#0ea5e9' opacity='0.3' />
-          <circle cx='290' cy='250' r='7' fill='#6366f1' opacity='0.3' />
-        </svg>
-      </div>
-    </div>
-  )
-}
-
 /* ---------- Main Page ---------- */
 
 export default function HomePage() {
   return (
-    <main className='bg-linear-to-b from-pink-50 to-purple-50 text-slate-900'>
+    <main className='bg-linear-to-b  from-pink-50 to-purple-50 text-slate-900'>
       {/* Hero Section */}
-      <section className='relative overflow-hidden mt-0 bg-pink-100'>
-        <div className='absolute inset-0 -z-10'>
-          <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,var(--tw-gradient-stops))],_var(--tw-gradient-stops))] from-teal-50 via-transparent to-transparent opacity-70' />
-          <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-indigo-50 via-transparent to-transparent opacity-70' />
-          <div className='absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,var(--tw-gradient-stops))] from-sky-50 via-transparent to-transparent opacity-50' />
-        </div>
-
-        <div
-          className='absolute inset-0 -z-10 opacity-[0.03]'
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, rgb(15 23 42) 1px, transparent 0)',
-            backgroundSize: '40px 40px'
-          }}
-        />
-
-        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-32'>
-          <div className='grid lg:grid-cols-2 gap-12 items-center'>
+      <section className='relative isolate overflow-hidden  mt-0'>
+        {/* Content wrapper: fill remaining viewport after nav and center */}
+        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8  flex items-center  -mt-[40px]  md:py-20'>
+          <div className='grid lg:grid-cols-2 gap-12 items-center w-full'>
             {/* Left Column */}
             <div className='space-y-8'>
-              <div className='inline-flex items-center gap-2 rounded-full bg-white border border-teal-200/50 px-4 py-2 shadow-sm'>
-                <div className='w-2 h-2 rounded-full bg-teal-500 animate-pulse' />
+              <div className='inline-flex items-center gap-2 rounded-full bg-white/90 border border-teal-200/60 px-4 py-2 shadow-sm'>
+                <span className='w-2 h-2 rounded-full bg-teal-500 animate-pulse' />
                 <span className='text-sm font-medium text-slate-700'>
                   Bangladesh Premier IELTS Institute
                 </span>
@@ -384,7 +257,7 @@ export default function HomePage() {
                   <span className='font-semibold text-indigo-700'>SAT</span>,
                   explore{' '}
                   <span className='font-semibold text-purple-700'>
-                    Robotics & BTEC
+                    Robotics &amp; BTEC
                   </span>
                   , and achieve your{' '}
                   <span className='font-semibold text-slate-800'>
@@ -398,21 +271,25 @@ export default function HomePage() {
                 <Link
                   href='/interested/form/combo-ielts-express'
                   className='group inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-white bg-linear-to-r from-teal-600 to-sky-600 hover:from-teal-700 hover:to-sky-700 shadow-lg hover:shadow-xl transition-all duration-300'
+                  aria-label='Book a free consultation'
                 >
                   Book Free Consultation
-                  <span className='group-hover:translate-x-1 transition-transform'>
+                  <span className='transition-transform group-hover:translate-x-1'>
                     →
                   </span>
                 </Link>
+
                 <Link
                   href='/courses'
                   className='inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-slate-700 bg-white border-2 border-slate-200 hover:border-teal-300 hover:bg-slate-50 shadow-sm hover:shadow transition-all duration-300'
+                  aria-label='Explore courses'
                 >
                   Explore Courses
                 </Link>
               </div>
 
-              <div className='grid grid-cols-4 gap-4 pt-4'>
+              {/* Highlights (kept your mapping) */}
+              <div className='grid grid-cols-2 sm:grid-cols-4 gap-4 pt-2'>
                 {HIGHLIGHTS.map((h) => (
                   <div key={h.k} className='text-center'>
                     <div className='text-2xl md:text-3xl font-bold bg-linear-to-r from-teal-600 to-sky-600 bg-clip-text text-transparent'>
@@ -425,10 +302,10 @@ export default function HomePage() {
             </div>
 
             {/* Right Column */}
-            <div className='lg:pl-8'>
+            <div className='lg:pl-8 '>
               <div className='relative'>
-                <div className='absolute inset-0 bg-linear-to-br from-teal-100 to-indigo-100 rounded-3xl transform rotate-3 opacity-20' />
-                <div className='relative bg-white/40 backdrop-blur-sm rounded-3xl border border-white/60 shadow-2xl p-8'>
+                <div className='absolute inset-0 bg-linear-to-br from-violet-500 to-indigo-100 rounded-3xl rotate-3 opacity-20' />
+                <div className='relative bg-white/50 backdrop-blur-sm rounded-3xl border border-white/60 shadow-2xl p-6 sm:p-8'>
                   <HeroIllustration />
                 </div>
               </div>
