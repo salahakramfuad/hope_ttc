@@ -53,7 +53,7 @@ function SocialIcon({ name }: { name: 'Facebook' | 'Instagram' | 'LinkedIn' }) {
 
 export default function Footer() {
   return (
-    <footer role='contentinfo' className='bg-white'>
+    <footer role='contentinfo' className='bg-violet-50'>
       {/* Soft top ribbon */}
       <div className='h-2 w-full bg-linear-to-r from-indigo-200 via-sky-200 to-teal-200' />
       {/* Top: Brand + Nav + Contact */}

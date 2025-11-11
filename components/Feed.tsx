@@ -686,7 +686,7 @@ export default function HomePage() {
                 </div>
               </div>
               <p className='text-sm text-slate-600 leading-relaxed italic'>
-                `&quot;`
+                {t.quote}
               </p>
             </Card>
           ))}
@@ -811,36 +811,6 @@ export default function HomePage() {
               >
                 Contact Us
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Strip */}
-      <section className='py-10 border-t border-slate-200 bg-white/60'>
-        <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-6 md:grid-cols-3'>
-          <div className='rounded-2xl border border-slate-200 bg-white p-6'>
-            <div className='text-sm font-semibold text-slate-500'>Email</div>
-            <Link
-              href='mailto:info@hopettc.com'
-              className='mt-1 block text-slate-900 font-medium hover:text-teal-700'
-            >
-              info@hopettc.com
-            </Link>
-          </div>
-          <div className='rounded-2xl border border-slate-200 bg-white p-6'>
-            <div className='text-sm font-semibold text-slate-500'>Phone</div>
-            <Link
-              href='tel:+8801949308141'
-              className='mt-1 block text-slate-900 font-medium hover:text-teal-700'
-            >
-              +880 1949-308141
-            </Link>
-          </div>
-          <div className='rounded-2xl border border-slate-200 bg-white p-6'>
-            <div className='text-sm font-semibold text-slate-500'>Address</div>
-            <div className='mt-1 text-slate-900 font-medium'>
-              Plot-7, Road-6, Sector-4, Uttara, Dhaka
             </div>
           </div>
         </div>
