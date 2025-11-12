@@ -4,13 +4,83 @@
 import React from 'react'
 import Link from 'next/link'
 
+type SubmitState = 'idle' | 'submitting' | 'success' | 'error'
+
 export default function GetEnrolledPage() {
-  const [submitted, setSubmitted] = React.useState(false)
+  const [state, setState] = React.useState<SubmitState>('idle')
+  const [error, setError] = React.useState<string | null>(null)
+  const [emailForMsg, setEmailForMsg] = React.useState<string>('')
+  const [showToast, setShowToast] = React.useState(false)
+  const msgRef = React.useRef<HTMLDivElement | null>(null)
+
+  React.useEffect(() => {
+    if (state === 'success' || state === 'error') {
+      // focus/scroll message into view for quick visibility
+      msgRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [state])
+
+  React.useEffect(() => {
+    if (state === 'success') {
+      setShowToast(true)
+      const t = setTimeout(() => setShowToast(false), 3800)
+      return () => clearTimeout(t)
+    }
+  }, [state])
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setState('submitting')
+    setError(null)
+
+    const form = e.currentTarget // capture before await (avoid pooled event)
+    const fd = new FormData(form)
+    const payload = {
+      name: String(fd.get('name') || ''),
+      email: String(fd.get('email') || ''),
+      phone: String(fd.get('phone') || ''),
+      contactPref: String(fd.get('contactPref') || ''),
+      program: String(fd.get('program') || ''),
+      campus: String(fd.get('campus') || ''),
+      message: String(fd.get('message') || ''),
+      hp: String(fd.get('hp') || '') // honeypot
+    }
+
+    setEmailForMsg(payload.email)
+
+    try {
+      const res = await fetch('/api/enroll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      const json: { ok?: boolean; error?: string } = await res.json()
+      if (!res.ok || !json.ok) throw new Error(json.error || 'Failed to send')
+
+      form.reset()
+      setState('success')
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Submission failed')
+      setState('error')
+    }
+  }
 
   return (
     <main className='min-h-screen bg-linear-to-b from-purple-50 to-sky-100'>
-      {/* Hero */}
+      {/* Toast (email pop-up) */}
+      {showToast && (
+        <div
+          className='fixed left-1/2 top-6 z-50 -translate-x-1/2 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-2 text-emerald-900 shadow-md'
+          role='status'
+          aria-live='polite'
+        >
+          We’ll contact you at{' '}
+          <span className='font-semibold'>{emailForMsg}</span>.
+        </div>
+      )}
+
       <section className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-12'>
+        {/* Hero */}
         <div className='text-center'>
           <span className='inline-block rounded-full bg-sky-50 border border-sky-200 text-sky-700 px-4 py-1.5 text-xs font-semibold tracking-wider uppercase shadow-sm'>
             Admissions
@@ -28,8 +98,8 @@ export default function GetEnrolledPage() {
         <div className='mt-10 grid gap-6 lg:grid-cols-3'>
           {/* Form Card */}
           <section className='lg:col-span-2'>
-            {/* Success banner */}
-            {submitted && (
+            {/* Success banner (top) */}
+            {state === 'success' && (
               <div className='mb-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-emerald-800'>
                 <div className='flex items-start gap-3'>
                   <span className='mt-0.5'>✅</span>
@@ -40,6 +110,19 @@ export default function GetEnrolledPage() {
                     <div className='text-sm'>
                       Our team will contact you soon via your preferred channel.
                     </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Error banner (top) */}
+            {state === 'error' && error && (
+              <div className='mb-4 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-rose-800'>
+                <div className='flex items-start gap-3'>
+                  <span className='mt-0.5'>⚠️</span>
+                  <div>
+                    <div className='font-semibold'>Something went wrong.</div>
+                    <div className='text-sm'>{error}</div>
                   </div>
                 </div>
               </div>
@@ -56,15 +139,19 @@ export default function GetEnrolledPage() {
 
               <form
                 className='mt-6 space-y-5'
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  const form = e.currentTarget as HTMLFormElement
-                  const fd = new FormData(form)
-                  // TODO: send fd to your API route or webhook here.
-                  form.reset()
-                  setSubmitted(true)
-                }}
+                onSubmit={handleSubmit}
+                noValidate
               >
+                {/* Honeypot (hidden) */}
+                <input
+                  type='text'
+                  name='hp'
+                  tabIndex={-1}
+                  autoComplete='off'
+                  className='hidden'
+                  aria-hidden='true'
+                />
+
                 {/* Name / Email */}
                 <div className='grid sm:grid-cols-2 gap-4'>
                   <div>
@@ -99,7 +186,13 @@ export default function GetEnrolledPage() {
                       required
                       placeholder='you@example.com'
                       autoComplete='email'
+                      inputMode='email'
+                      pattern='^[^@\s]+@[^@\s]+\.[^@\s]+$'
+                      aria-describedby='email-hint'
                     />
+                    <p id='email-hint' className='text-xs text-slate-500 mt-1'>
+                      Use a valid email so we can reach you.
+                    </p>
                   </div>
                 </div>
 
@@ -235,12 +328,57 @@ export default function GetEnrolledPage() {
                   </label>
                 </div>
 
+                {/* Submit */}
                 <button
                   type='submit'
-                  className='w-full mt-2 bg-linear-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 text-white font-semibold py-3 rounded-xl shadow-sm transition'
+                  disabled={state === 'submitting'}
+                  className='w-full mt-2 inline-flex items-center justify-center gap-2 bg-linear-to-r from-sky-600 to-teal-600 hover:from-sky-700 hover:to-teal-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl shadow-sm transition'
+                  aria-busy={state === 'submitting'}
                 >
-                  Submit Enquiry
+                  {state === 'submitting' && (
+                    <svg
+                      className='h-5 w-5 animate-spin'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'
+                      aria-hidden='true'
+                    >
+                      <circle
+                        className='opacity-25'
+                        cx='12'
+                        cy='12'
+                        r='10'
+                        stroke='currentColor'
+                        strokeWidth='4'
+                      />
+                      <path
+                        className='opacity-75'
+                        fill='currentColor'
+                        d='M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z'
+                      />
+                    </svg>
+                  )}
+                  {state === 'submitting' ? 'Submitting…' : 'Submit Enquiry'}
                 </button>
+
+                {/* Inline status message just under the button */}
+                <div
+                  ref={msgRef}
+                  className='min-h-1.25rem'
+                  role='status'
+                  aria-live='polite'
+                >
+                  {state === 'success' && (
+                    <p className='mt-2 text-sm text-emerald-700'>
+                      🎉 Thank you! Our representative will contact you shortly.
+                      We’ll reach you at{' '}
+                      <span className='font-medium'>{emailForMsg}</span>.
+                    </p>
+                  )}
+                  {state === 'error' && error && (
+                    <p className='mt-2 text-sm text-rose-700'>⚠️ {error}</p>
+                  )}
+                </div>
 
                 <p className='text-center text-slate-500 text-xs'>
                   We respect your privacy. Our team will contact you to assist
@@ -257,7 +395,6 @@ export default function GetEnrolledPage() {
               <p className='text-sm text-slate-600 mt-1'>
                 Talk to an advisor now or book a free consultation.
               </p>
-
               <div className='mt-4 grid gap-3'>
                 <a
                   href='https://wa.me/8801949308141'
@@ -299,7 +436,7 @@ export default function GetEnrolledPage() {
               </div>
             </div>
 
-            <div className='rounded-2xl bg-gradient-to-br from-sky-50 to-teal-50 border border-sky-100 p-6'>
+            <div className='rounded-2xl bg-linear-to-br from-sky-50 to-teal-50 border border-sky-100 p-6'>
               <h3 className='font-semibold text-slate-900'>
                 What happens next?
               </h3>
