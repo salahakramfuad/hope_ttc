@@ -84,7 +84,7 @@ export default function IELTSPage() {
       <section className='relative isolate'>
         <div className='absolute inset-0 -z-10 overflow-hidden rounded-b-[28px]'>
           <Image
-            src='https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?q=80&w=1200&auto=format&fit=crop'
+            src='/images/ieltsbanner.jpeg'
             alt='Students preparing for IELTS at a modern study space'
             fill
             priority

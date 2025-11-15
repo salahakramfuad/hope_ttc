@@ -339,7 +339,7 @@ export default function HomePage() {
             </div>
 
             {/* Right Column */}
-            <div className='lg:pl-8 '>
+            <div className='hidden lg:block lg:pl-8'>
               <div className='relative'>
                 <div className='absolute inset-0 bg-linear-to-br from-violet-500 to-indigo-100 rounded-3xl rotate-3 opacity-20' />
                 <div className='relative bg-white/50 backdrop-blur-sm rounded-3xl border border-white/60 shadow-2xl p-6 sm:p-8'>
@@ -350,7 +350,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Trust Bar */}
       <section className='py-12 border-y border-slate-200 bg-white/50'>
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
@@ -362,18 +361,18 @@ export default function HomePage() {
             <div className='text-sm font-semibold text-slate-600'>
               IDP Certified
             </div>
-            <div className='w-px h-8 bg-slate-300' />
-            <div className='text-sm font-semibold text-slate-600'>
-              16+ Years Experience
-            </div>
+
             <div className='w-px h-8 bg-slate-300' />
             <div className='text-sm font-semibold text-slate-600'>
               2 Modern Campuses
             </div>
+            <div className='w-px h-8 bg-slate-300' />
+            <div className='text-sm font-semibold text-slate-600 text-center'>
+              Proud exam centre for IELTS, SAT, MET &amp; OET
+            </div>
           </div>
         </div>
       </section>
-
       {/* Courses */}
       <section className='py-20 md:py-28' id='courses'>
         <SectionTitle
@@ -420,7 +419,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
       {/* Features */}
       <section className='py-20 md:py-28 bg-linear-to-b from-slate-50 via-white to-slate-50/60'>
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
@@ -454,7 +452,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Why HOPE TTC */}
       <section className='py-20 md:py-32 relative overflow-hidden'>
         <div className='absolute inset-0 bg-linear-to-b from-white via-teal-50/30 to-white -z-10' />
@@ -596,7 +593,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* Testimonials */}
       <section className='py-20 md:py-28'>
         <SectionTitle
@@ -634,7 +630,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
       {/* FAQ */}
       <section className='py-20 md:py-28 bg-linear-to-b from-slate-50 to-white'>
         <SectionTitle
@@ -682,8 +677,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Campuses */}
+      {/* Exam Centre Highlight */}
       <section className='relative py-20 md:py-28'>
         {/* soft background frame */}
         <div className='pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-sky-50/70 via-white to-slate-50' />
@@ -693,88 +687,103 @@ export default function HomePage() {
         />
 
         <SectionTitle
-          eyebrow='Visit Us'
-          title='Modern Campuses in Dhaka'
-          desc='Bright classrooms, speaking labs, and dedicated mock centers.'
+          eyebrow='Official Exam Centre'
+          title='Proud Test Centre for Global Exams'
+          desc='We are an authorized exam centre for leading international tests in Dhaka.'
           size='lg'
         />
 
-        <div className='mx-auto mt-14 max-w-4xl px-4 sm:px-6 lg:px-8'>
-          <Card className='group relative overflow-hidden border border-slate-200/80 bg-white/90 shadow-sm transition hover:-translate-y-1 hover:border-sky-300/80 hover:shadow-xl focus-within:ring-2 focus-within:ring-sky-400/70'>
-            <Link href='/campus/uttara' className='flex h-full flex-col'>
-              <div className='relative aspect-video overflow-hidden'>
-                <SafeImage
-                  src='/images/campus-uttara.jpg'
-                  alt='Uttara Campus'
-                  className='h-full w-full object-cover transition duration-500 group-hover:scale-105 group-hover:brightness-105'
-                  width={800}
-                  height={450}
-                  sizes='(max-width: 1024px) 100vw, 50vw'
-                  preferPlaceholder
-                />
-                {/* overlay + tag */}
-                <div className='pointer-events-none absolute inset-0 bg-linear-to-t from-slate-950/55 via-slate-900/10 to-transparent opacity-90' />
-                <span className='absolute left-4 top-4 inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-medium uppercase tracking-wide text-slate-900 shadow-sm'>
-                  Flagship Campus
-                </span>
-              </div>
+        <div className='mx-auto mt-14 max-w-6xl px-4 sm:px-6 lg:px-8'>
+          <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-4'>
+            {[
+              {
+                slug: 'ielts',
+                code: 'IELTS',
+                label: 'IELTS Academic & General',
+                desc: 'High-stakes English test for study, work and migration worldwide.',
+                img: '/images/exams/ielts.png',
+                imgAlt: 'IELTS logo',
+                link: 'https://ielts.org/`'
+              },
+              {
+                slug: 'sat',
+                code: 'SAT',
+                label: 'SAT Digital',
+                desc: 'Essential for undergraduate admissions and scholarships abroad.',
+                img: '/images/exams/sat.png',
+                imgAlt: 'SAT logo',
+                link: 'https://satsuite.collegeboard.org/sat'
+              },
+              {
+                slug: 'met',
+                code: 'MET',
+                label: 'Michigan English Test (MET)',
+                desc: 'Flexible English proficiency test trusted by universities and employers.',
+                img: '/images/exams/met.png',
+                imgAlt: 'MET logo',
+                link: 'https://michiganassessment.org/michigan-tests/met-new/'
+              },
+              {
+                slug: 'oet',
+                code: 'OET',
+                label: 'OET for Healthcare',
+                desc: 'English test tailored for doctors, nurses, and healthcare professionals.',
+                img: '/images/exams/oet.png',
+                imgAlt: 'OET logo',
+                link: 'https://oet.com/'
+              }
+            ].map((exam) => (
+              <Card
+                key={exam.slug}
+                className='group relative h-full overflow-hidden border border-slate-200/80 bg-white/90 shadow-sm transition hover:-translate-y-1 hover:border-sky-300/80 hover:shadow-xl focus-within:ring-2 focus-within:ring-sky-400/70'
+              >
+                <Link
+                  href={`${exam.link}`}
+                  className='flex h-full flex-col p-5'
+                >
+                  {/* Logo + code/label */}
+                  <div className='mb-3 flex items-center gap-3'>
+                    <div className='relative h-10 w-10 overflow-hidden rounded-xl bg-slate-50 ring-1 ring-slate-200'>
+                      <Image
+                        src={exam.img}
+                        alt={exam.imgAlt}
+                        fill
+                        sizes='40px'
+                        className='object-contain p-1.5'
+                      />
+                    </div>
+                    <div>
+                      <div className='inline-flex items-center gap-2'>
+                        <span className='inline-flex h-7 min-w-10 items-center justify-center rounded-full bg-sky-50 px-3 text-[11px] font-semibold tracking-wide text-sky-700 ring-1 ring-sky-100'>
+                          {exam.code}
+                        </span>
+                        <span className='text-sm font-semibold text-slate-900'>
+                          {exam.label}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
 
-              <div className='flex flex-1 flex-col justify-between p-6'>
-                <div>
-                  <h3 className='flex items-center gap-2 text-lg font-semibold text-slate-900'>
-                    <span className='inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-50 text-sky-700 ring-1 ring-sky-100'>
-                      <MapPin className='h-4 w-4' aria-hidden='true' />
+                  <p className='text-sm text-slate-600 flex-1'>{exam.desc}</p>
+
+                  <div className='mt-4 inline-flex items-center text-sm font-medium text-sky-700'>
+                    <span className='relative'>
+                      Learn more
+                      <span className='absolute inset-x-0 -bottom-0.5 h-px w-full origin-left scale-x-0 bg-sky-500 transition group-hover:scale-x-100' />
                     </span>
-                    <span>Uttara Campus</span>
-                  </h3>
-                  <p className='mt-2 text-sm text-slate-600'>
-                    Plot 7, Road 6, Sector 4, Uttara, Dhaka
-                  </p>
-                </div>
-
-                <div className='mt-4 inline-flex items-center text-sm font-medium text-sky-700'>
-                  <span className='relative'>
-                    View directions
-                    <span className='absolute inset-x-0 -bottom-0.5 h-px w-full origin-left scale-x-0 bg-sky-500 transition group-hover:scale-x-100' />
-                  </span>
-                  <span className='ml-1 transition-transform group-hover:translate-x-0.5'>
-                    →
-                  </span>
-                </div>
-              </div>
-            </Link>
-          </Card>
-        </div>
-      </section>
-
-      {/* CTA Banner */}
-      <section className='py-16'>
-        <div className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
-          <div className='rounded-3xl border border-teal-200/50 bg-linear-to-r from-teal-50 to-sky-50 p-8 md:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6'>
-            <div>
-              <h3 className='text-2xl md:text-3xl font-bold text-slate-900'>
-                Ready to aim for Band 7+?
-              </h3>
-              <p className='mt-2 text-slate-700'>
-                Get a personalized study plan and a free diagnostic in your
-                first session.
-              </p>
-            </div>
-            <div className='flex gap-3'>
-              <Link
-                href='/getEnrolled'
-                className='inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white bg-linear-to-r from-teal-600 to-sky-600 shadow hover:shadow-md transition-all'
-              >
-                Apply Now
-              </Link>
-              <Link
-                href='/contact'
-                className='inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-teal-700 bg-white border border-teal-200 hover:bg-teal-50'
-              >
-                Contact Us
-              </Link>
-            </div>
+                    <span className='ml-1 transition-transform group-hover:translate-x-0.5'>
+                      →
+                    </span>
+                  </div>
+                </Link>
+              </Card>
+            ))}
           </div>
+
+          <p className='mt-6 text-center text-xs text-slate-500'>
+            We are proud to serve as an official exam centre for IELTS, SAT, MET
+            and OET in Dhaka.
+          </p>
         </div>
       </section>
     </main>
