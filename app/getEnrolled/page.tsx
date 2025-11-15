@@ -378,7 +378,7 @@ export default function GetEnrolledPage() {
                 {/* Inline status message just under the button */}
                 <div
                   ref={msgRef}
-                  className='min-h-[1.25rem]'
+                  className='min-h-5'
                   role='status'
                   aria-live='polite'
                 >

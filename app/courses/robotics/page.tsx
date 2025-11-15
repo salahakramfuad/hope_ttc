@@ -171,7 +171,7 @@ export default function RoboticsPage() {
             style={{ objectPosition: 'center' }}
           />
           {/* Dark overlay for readability */}
-          <div className='absolute inset-0 bg-gradient-to-tr from-black/80 via-black/60 to-black/30' />
+          <div className='absolute inset-0 bg-linear-to-tr from-black/80 via-black/60 to-black/30' />
         </div>
 
         <div className='mx-auto max-w-6xl px-6 pt-20 pb-16 text-white'>
