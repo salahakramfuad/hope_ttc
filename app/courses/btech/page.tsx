@@ -1,18 +1,18 @@
-// app/biotech/page.tsx
+// app/btech/page.tsx
 import Link from 'next/link'
 import React from 'react'
 
-export default function BiotechPage() {
-  // HOPE TTC light palette
+export default function BtecPage() {
+  // BTEC palette aligned with #FAF5FF navbar/footer
   const brand = {
-    primary: '#9C27B0',
-    primarySoft: 'rgba(156,39,176,0.10)',
-    violet: '#7C3AED',
-    pink: '#EC4899',
-    bg: '#FCFAFF',
-    text: '#11181C',
-    subText: 'rgba(17,24,28,0.75)',
-    border: 'rgba(0,0,0,0.08)'
+    primary: '#6D28D9', // softer violet
+    primarySoft: 'rgba(109,40,217,0.05)',
+    accent: '#7C3AED', // secondary violet
+    accentSoft: 'rgba(124,58,237,0.04)',
+    bg: '#F7F2FF', // slightly dimmer than #FAF5FF
+    text: '#1F2933',
+    subText: 'rgba(31,41,51,0.78)',
+    border: 'rgba(15,23,42,0.06)'
   }
 
   const pill =
@@ -28,46 +28,66 @@ export default function BiotechPage() {
           opacity: 1,
           background:
             `radial-gradient(45% 45% at 15% 20%, ${brand.primarySoft} 0%, transparent 60%),` +
-            `radial-gradient(40% 40% at 85% 30%, rgba(124,58,237,0.10) 0%, transparent 60%),` +
-            `radial-gradient(35% 35% at 40% 85%, rgba(236,72,153,0.08) 0%, transparent 60%)`
+            `radial-gradient(40% 40% at 85% 30%, ${brand.accentSoft} 0%, transparent 60%),` +
+            `radial-gradient(35% 35% at 40% 85%, rgba(244,231,255,0.5) 0%, transparent 60%)`
         }}
       />
 
       <section className='relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-16 md:py-24'>
         {/* HERO */}
         <header className='text-center'>
-          <span
-            className={pill}
-            style={{
-              color: brand.primary,
-              border: `1px solid ${brand.primary}40`,
-              background: brand.primarySoft
-            }}
-          >
-            Biotechnology @ HOPE TTC
-          </span>
+          <div className='inline-flex items-center gap-2'>
+            <span
+              className={pill}
+              style={{
+                color: brand.primary,
+                border: `1px solid ${brand.primary}40`,
+                background: brand.primarySoft
+              }}
+            >
+              Pearson BTEC @ HOPE TTC
+            </span>
+            <span
+              className={`${pill} text-[10px]`}
+              style={{
+                color: brand.accent,
+                border: `1px solid ${brand.accent}40`,
+                background: '#FFFFFF'
+              }}
+            >
+              Coming Soon
+            </span>
+          </div>
 
           <h1 className='mt-4 text-4xl md:text-6xl font-extrabold leading-tight tracking-tight'>
-            Learn <span style={{ color: brand.primary }}>Biotech</span>. Master{' '}
-            <span style={{ color: brand.violet }}>Wet-Lab & Data</span>. Build{' '}
-            <span style={{ color: brand.pink }}>Real-world Skills</span>.
+            Career-Focused{' '}
+            <span style={{ color: brand.primary }}>BTEC Pathways</span> for
+            Real-World Skills.
           </h1>
 
           <p
-            className='mx-auto mt-4 max-w-2xl text-base md:text-lg'
+            className='mx-auto mt-4 max-w-3xl text-base md:text-lg'
             style={{ color: brand.subText }}
           >
-            From pipettes to Python—foundations of molecular biology,
-            bioinformatics, and lab practices through project-based learning.
+            Pearson BTECs are practical, skills-based qualifications designed
+            with employers and universities. At HOPE TTC, we&apos;re preparing
+            industry-aligned BTEC programmes that help learners move confidently
+            into higher study or work.
           </p>
 
           <div className='mt-8 flex flex-wrap justify-center gap-3'>
             <Link
               href='/get-enrolled'
               className='inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition shadow-sm'
-              style={{ background: brand.primary, color: '#FFFFFF' }}
+              style={{
+                background: brand.primary,
+                color: '#FFFFFF',
+                opacity: 0.7,
+                cursor: 'not-allowed'
+              }}
+              aria-disabled='true'
             >
-              Enroll Now →
+              BTEC Admissions – Coming Soon
             </Link>
             <Link
               href='/contact'
@@ -80,79 +100,243 @@ export default function BiotechPage() {
               Talk to an Advisor
             </Link>
           </div>
+
+          <p
+            className='mt-4 text-xs md:text-sm'
+            style={{ color: brand.subText }}
+          >
+            Learn more about BTEC on the official Pearson site:{' '}
+            <a
+              href='https://qualifications.pearson.com/en/about-us/qualification-brands/btec.html'
+              target='_blank'
+              rel='noreferrer'
+              className='underline underline-offset-2'
+              style={{ color: brand.accent }}
+            >
+              Pearson BTEC Overview
+            </a>
+            .
+          </p>
         </header>
 
         {/* HIGHLIGHTS */}
         <div className='mt-12 grid gap-4 sm:grid-cols-3'>
           {[
-            { k: 'Project-First', v: '10+ Experiments' },
-            { k: 'Dual Focus', v: 'Wet-Lab + Bioinfo' },
-            { k: 'Pathways', v: 'Beginner → Advanced' }
+            {
+              k: 'Career-Focused',
+              v: 'Designed Around Real Work',
+              desc: 'Assignments and projects mirror real industry scenarios instead of only final exams.'
+            },
+            {
+              k: 'Employer-Backed',
+              v: 'Developed With Industry',
+              desc: 'Content shaped with employers and higher-education experts to match current skills needs.'
+            },
+            {
+              k: 'Progression',
+              v: 'Pathway to Study or Work',
+              desc: 'Recognised by universities and employers worldwide for further study and employment routes.'
+            }
           ].map((h) => (
             <div
               key={h.k}
-              className='rounded-2xl p-5 text-center bg-white'
+              className='rounded-2xl p-5 bg-white text-left'
               style={{
                 border: `1px solid ${brand.border}`,
-                boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
+                boxShadow: '0 1px 2px rgba(15,23,42,0.04)'
               }}
             >
               <div
-                className='text-2xl md:text-3xl font-extrabold'
-                style={{ color: brand.primary }}
-              >
-                {h.v}
-              </div>
-              <div
-                className='mt-1 text-xs font-medium tracking-wide'
+                className='text-xs font-semibold tracking-wide uppercase'
                 style={{ color: brand.subText }}
               >
                 {h.k}
               </div>
+              <div
+                className='mt-1 text-lg font-extrabold'
+                style={{ color: brand.primary }}
+              >
+                {h.v}
+              </div>
+              <p
+                className='mt-2 text-xs md:text-sm'
+                style={{ color: brand.subText }}
+              >
+                {h.desc}
+              </p>
             </div>
           ))}
         </div>
 
-        {/* TRACKS */}
+        {/* WHAT IS A BTEC */}
+        <section className='mt-14 grid gap-10 md:grid-cols-[1.4fr,1fr] items-start'>
+          <div>
+            <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
+              What is a Pearson BTEC?
+            </h2>
+            <p
+              className='mt-3 text-sm md:text-base'
+              style={{ color: brand.subText }}
+            >
+              BTEC (Business &amp; Technology Education Council) qualifications
+              are practical, vocational routes that blend theory with hands-on
+              projects. Learners build knowledge, skills, and behaviours they
+              can use directly in the workplace or in further study.
+            </p>
+            <p
+              className='mt-3 text-sm md:text-base'
+              style={{ color: brand.subText }}
+            >
+              Instead of relying only on one big exam at the end, most BTEC
+              programmes are made up of themed units. Assessment typically
+              includes coursework, projects, presentations, and scenario-based
+              tasks that reflect real situations in business, IT, engineering,
+              health, and many other sectors.
+            </p>
+
+            <div className='mt-5 grid gap-3 sm:grid-cols-3'>
+              {[
+                {
+                  title: 'Skills-Based',
+                  items: [
+                    'Applied projects',
+                    'Teamwork & communication',
+                    'Problem-solving'
+                  ]
+                },
+                {
+                  title: 'Unit-Based',
+                  items: [
+                    'Themed units',
+                    'Ongoing assessment',
+                    'Clear progression'
+                  ]
+                },
+                {
+                  title: 'Globally Trusted',
+                  items: [
+                    'Used worldwide',
+                    'Recognised by universities',
+                    'Valued by employers'
+                  ]
+                }
+              ].map((c) => (
+                <div
+                  key={c.title}
+                  className='rounded-2xl p-4 bg-white'
+                  style={{ border: `1px solid ${brand.border}` }}
+                >
+                  <h3
+                    className='text-sm font-semibold'
+                    style={{ color: brand.primary }}
+                  >
+                    {c.title}
+                  </h3>
+                  <ul className='mt-2 space-y-1 text-[11px]'>
+                    {c.items.map((i) => (
+                      <li
+                        key={i}
+                        className='flex items-start gap-2'
+                        style={{ color: brand.subText }}
+                      >
+                        <span
+                          className='mt-1 h-1.5 w-1.5 rounded-full'
+                          style={{ background: brand.accent }}
+                        />
+                        {i}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Status card */}
+          <div
+            className='rounded-3xl p-6 bg-white'
+            style={{
+              border: `1px solid ${brand.primary}33`,
+              boxShadow: '0 10px 30px rgba(15,23,42,0.06)'
+            }}
+          >
+            <div className='inline-flex items-center gap-2 rounded-full px-3 py-1 bg-[rgba(34,197,94,0.06)] text-xs font-semibold text-emerald-700'>
+              ● Centre Launch in Planning
+            </div>
+            <h3 className='mt-3 text-lg font-bold'>
+              BTEC at HOPE TTC — Coming Soon
+            </h3>
+            <p className='mt-2 text-sm' style={{ color: brand.subText }}>
+              We&apos;re designing Pearson-aligned BTEC pathways for Dhaka,
+              focusing on practical learning, lab and project-based work, and
+              clear routes into university and employment.
+            </p>
+            <ul
+              className='mt-3 space-y-1.5 text-xs'
+              style={{ color: brand.subText }}
+            >
+              <li>• Planned intakes for school leavers and adult learners</li>
+              <li>• Focus on Business, IT, and Science-related fields</li>
+              <li>• Industry-driven projects and mentoring</li>
+            </ul>
+            <Link
+              href='/contact'
+              className='mt-4 inline-flex items-center justify-center rounded-xl px-4 py-2 text-xs font-semibold'
+              style={{
+                background: brand.primary,
+                color: '#FFFFFF'
+              }}
+            >
+              Join the BTEC Waitlist
+            </Link>
+          </div>
+        </section>
+
+        {/* LEVELS & PATHWAYS */}
         <section className='mt-14'>
           <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
-            Learning Tracks
+            Planned BTEC Pathways at HOPE TTC
           </h2>
-          <p className='mt-2' style={{ color: brand.subText }}>
-            Choose your entry point. Each track finishes with a showcase
-            project.
+          <p
+            className='mt-2 text-sm md:text-base'
+            style={{ color: brand.subText }}
+          >
+            BTEC offers routes from foundational learning up to advanced
+            specialist study. At HOPE TTC we plan to start with internationally
+            relevant programmes that support both university entry and direct
+            employment.
           </p>
 
           <div className='mt-6 grid gap-6 md:grid-cols-3'>
             {[
               {
-                title: 'Molecular Biology',
-                tag: 'Beginner',
-                color: brand.primary,
+                title: 'BTEC Level 2 (Foundation / Firsts)',
+                tag: 'Planned',
+                level: 'Approx. equivalent to O-Level standard',
                 bullets: [
-                  'DNA/RNA basics',
-                  'PCR, Gel Electrophoresis',
-                  'Sterile technique & safety'
+                  'Introduce vocational skills in a chosen sector',
+                  'Build confidence with applied projects',
+                  'Prepare for Level 3 or entry-level roles'
                 ]
               },
               {
-                title: 'Bioinformatics',
-                tag: 'Intermediate',
-                color: brand.violet,
+                title: 'BTEC Level 3 (Nationals)',
+                tag: 'Core Focus',
+                level: 'Approx. equivalent to A-Levels',
                 bullets: [
-                  'FASTA/BLAST, NCBI',
-                  'Python & Pandas basics',
-                  'Sequence alignment & visualization'
+                  'Deep, specialist learning for 16+',
+                  'Widely used for university admission',
+                  'Strong portfolio of coursework and projects'
                 ]
               },
               {
-                title: 'Applied Biotech',
-                tag: 'Advanced',
-                color: brand.pink,
+                title: 'Higher Nationals (HN)',
+                tag: 'Future Phase',
+                level: 'Early years of university-level study',
                 bullets: [
-                  'Synthetic biology intro',
-                  'qPCR & quantification',
-                  'Small project design & reporting'
+                  'Advanced professional skills',
+                  'Possible credit transfer to degrees',
+                  'Ideal for work-ready qualifications'
                 ]
               }
             ].map((t) => (
@@ -161,26 +345,34 @@ export default function BiotechPage() {
                 className='relative rounded-2xl p-6 bg-white'
                 style={{
                   border: `1px solid ${brand.border}`,
-                  boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
+                  boxShadow: '0 1px 2px rgba(15,23,42,0.04)'
                 }}
               >
                 <div
-                  className='pointer-events-none absolute -inset-px rounded-2xl opacity-20'
+                  className='pointer-events-none absolute -inset-px rounded-2xl opacity-15'
                   style={{
-                    backgroundImage: `linear-gradient(to bottom, ${t.color}, transparent)`
+                    backgroundImage: `linear-gradient(to bottom right, ${brand.primary}, transparent)`
                   }}
                 />
                 <div className='relative'>
-                  <div
-                    className='inline-flex items-center gap-2 rounded-md px-2 py-1 text-[11px] font-semibold bg-[#FAFAFF]'
-                    style={{
-                      border: `1px solid ${brand.border}`,
-                      color: t.color
-                    }}
-                  >
-                    {t.tag}
+                  <div className='flex items-center justify-between gap-2'>
+                    <span
+                      className='inline-flex items-center gap-2 rounded-md px-2 py-1 text-[11px] font-semibold bg-[#F9FAFB]'
+                      style={{
+                        border: `1px solid ${brand.border}`,
+                        color: brand.primary
+                      }}
+                    >
+                      {t.tag}
+                    </span>
+                    <span className='text-[10px] font-medium uppercase tracking-wide text-amber-600'>
+                      Coming Soon
+                    </span>
                   </div>
                   <h3 className='mt-3 text-lg font-bold'>{t.title}</h3>
+                  <p className='mt-1 text-xs' style={{ color: brand.subText }}>
+                    {t.level}
+                  </p>
                   <ul
                     className='mt-3 space-y-2 text-sm'
                     style={{ color: brand.subText }}
@@ -189,7 +381,7 @@ export default function BiotechPage() {
                       <li key={b} className='flex items-start gap-2'>
                         <span
                           className='mt-1 h-1.5 w-1.5 rounded-full'
-                          style={{ background: t.color }}
+                          style={{ background: brand.accent }}
                         />
                         {b}
                       </li>
@@ -201,104 +393,29 @@ export default function BiotechPage() {
           </div>
         </section>
 
-        {/* CURRICULUM SNAPSHOT */}
+        {/* SUBJECT AREAS */}
         <section className='mt-14'>
           <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
-            Curriculum Snapshot
+            Subject Areas BTEC Covers
           </h2>
-          <div className='mt-6 grid gap-6 md:grid-cols-2'>
-            {[
-              {
-                title: 'Core Lab Skills',
-                items: [
-                  'Pipetting & calibration',
-                  'Buffer prep & pH',
-                  'Aseptic technique'
-                ]
-              },
-              {
-                title: 'Molecular Techniques',
-                items: [
-                  'DNA extraction',
-                  'PCR optimization',
-                  'Gel imaging & analysis'
-                ]
-              },
-              {
-                title: 'Data & Bioinformatics',
-                items: [
-                  'FASTA/FASTQ basics',
-                  'BLAST & Clustal Ω',
-                  'Intro to Python & Pandas'
-                ]
-              },
-              {
-                title: 'Ethics & Safety',
-                items: [
-                  'Lab safety & PPE',
-                  'Biosafety levels',
-                  'Data integrity & reporting'
-                ]
-              }
-            ].map((c, i) => (
-              <div
-                key={c.title}
-                className='rounded-2xl p-6 bg-white'
-                style={{
-                  border: `1px solid ${brand.border}`,
-                  boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
-                }}
-              >
-                <h3
-                  className='text-lg font-bold'
-                  style={{
-                    color: [
-                      brand.primary,
-                      brand.violet,
-                      brand.pink,
-                      brand.primary
-                    ][i % 4]
-                  }}
-                >
-                  {c.title}
-                </h3>
-                <ul
-                  className='mt-3 space-y-2 text-sm'
-                  style={{ color: brand.subText }}
-                >
-                  {c.items.map((i) => (
-                    <li key={i} className='flex items-start gap-2'>
-                      <span
-                        className='mt-1 h-1.5 w-1.5 rounded-full'
-                        style={{ background: brand.violet }}
-                      />
-                      {i}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* LABS & TOOLS */}
-        <section className='mt-14'>
-          <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
-            Labs & Tools You’ll Use
-          </h2>
+          <p
+            className='mt-2 text-sm md:text-base'
+            style={{ color: brand.subText }}
+          >
+            Globally, BTECs are available across more than a dozen sectors, from
+            business and IT to creative media and healthcare. At HOPE TTC
+            we&apos;ll start with a focused set of pathways and grow over time.
+          </p>
           <div className='mt-4 flex flex-wrap gap-2'>
             {[
-              'PCR',
-              'Gel Electrophoresis',
-              'Centrifuge',
-              'Micropipettes',
-              'Spectrophotometer',
-              'Agarose & Buffers',
-              'NCBI / BLAST',
-              'Clustal Ω',
-              'Python',
-              'Pandas',
-              'Biopython'
+              'Business & Entrepreneurship',
+              'Information Technology',
+              'Applied Science',
+              'Health & Social Care',
+              'Creative Media',
+              'Engineering (future)',
+              'Hospitality & Tourism (future)',
+              'Sport & Fitness (future)'
             ].map((t) => (
               <span
                 key={t}
@@ -314,27 +431,24 @@ export default function BiotechPage() {
           </div>
         </section>
 
-        {/* PROJECTS */}
+        {/* PROGRESSION */}
         <section className='mt-14'>
           <h2 className='text-2xl md:text-3xl font-bold tracking-tight'>
-            Capstone Projects
+            Progress with BTEC
           </h2>
           <div className='mt-6 grid gap-6 md:grid-cols-3'>
             {[
               {
-                title: 'PCR & Gel Report',
-                desc: 'Amplify a target gene and quantify bands with ImageJ.',
-                color: brand.primary
+                title: 'University & Higher Study',
+                desc: 'Use Level 3 BTEC Nationals to apply for degrees in related fields, often alongside other qualifications.'
               },
               {
-                title: 'Sequence Explorer',
-                desc: 'Fetch sequences via NCBI and run BLAST + alignment.',
-                color: brand.violet
+                title: 'Employment & Apprenticeships',
+                desc: 'Move directly into work or apprenticeships with practical skills, a portfolio of projects, and sector-specific knowledge.'
               },
               {
-                title: 'Mini-Research Poster',
-                desc: 'Design a poster summarizing methods, results, and ethics.',
-                color: brand.pink
+                title: 'Lifelong Upskilling',
+                desc: 'Adults and professionals can use BTECs to reskill, switch careers, or gain industry-aligned qualifications while working.'
               }
             ].map((p) => (
               <div
@@ -342,18 +456,17 @@ export default function BiotechPage() {
                 className='relative overflow-hidden rounded-2xl p-6 bg-white'
                 style={{
                   border: `1px solid ${brand.border}`,
-                  boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
+                  boxShadow: '0 1px 2px rgba(15,23,42,0.04)'
                 }}
               >
                 <div
                   className='pointer-events-none absolute -inset-px opacity-15 blur-2xl'
                   style={{
-                    backgroundImage: `linear-gradient(135deg, ${p.color}, transparent)`
+                    backgroundImage: `linear-gradient(135deg, ${brand.accent}, transparent)`
                   }}
                 />
                 <div className='relative'>
-                  <div className='text-5xl'>🧬</div>
-                  <h3 className='mt-3 text-lg font-bold'>{p.title}</h3>
+                  <h3 className='text-lg font-bold'>{p.title}</h3>
                   <p className='mt-2 text-sm' style={{ color: brand.subText }}>
                     {p.desc}
                   </p>
@@ -372,16 +485,20 @@ export default function BiotechPage() {
           >
             {[
               {
-                q: 'Do I need prior lab experience?',
-                a: 'No—Beginners start with safety, pipetting, and core lab skills.'
+                q: 'Are BTEC programmes available at HOPE TTC right now?',
+                a: 'Not yet. We are preparing our Pearson-aligned BTEC offering and centre approvals. All programmes on this page are marked as “Coming Soon” to show they are planned, not currently running.'
               },
               {
-                q: 'Are lab materials provided?',
-                a: 'Core consumables are available in-center; you’ll receive a checklist before class.'
+                q: 'Who are BTECs suitable for?',
+                a: 'BTECs work well for learners who prefer applied, coursework-led learning and want a clear line of sight to university, skilled employment, or apprenticeships.'
               },
               {
-                q: 'Will I learn coding?',
-                a: 'Yes—bioinformatics introduces Python for sequence handling and analysis.'
+                q: 'How will assessment work?',
+                a: 'Most BTEC units are assessed through assignments, projects, and practical tasks linked to real-life scenarios, with some externally set or marked components depending on the qualification.'
+              },
+              {
+                q: 'How can I stay updated about launch dates?',
+                a: 'Use the Contact Team or Join the BTEC Waitlist button above and we’ll email you once intakes, subjects, and entry requirements are confirmed.'
               }
             ].map((f, i) => (
               <details key={i} className='group'>
@@ -419,29 +536,32 @@ export default function BiotechPage() {
                 className='text-xl md:text-2xl font-extrabold'
                 style={{ color: brand.primary }}
               >
-                Start your Biotech journey today
+                Be the first to know when BTEC launches at HOPE TTC
               </h3>
               <p className='text-sm' style={{ color: brand.subText }}>
-                Book a free counseling call and get the detailed syllabus.
+                Join our interest list and we&apos;ll share confirmed subjects,
+                entry requirements, and intake dates as soon as they go live.
               </p>
             </div>
             <div className='flex gap-3'>
               <Link
-                href='/get-enrolled'
+                href='/contact'
                 className='inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition shadow-sm'
                 style={{ background: brand.primary, color: '#FFFFFF' }}
               >
-                Get Enrolled
+                Join BTEC Waitlist
               </Link>
               <Link
-                href='/contact'
+                href='https://qualifications.pearson.com/en/about-us/qualification-brands/btec.html'
+                target='_blank'
+                rel='noreferrer'
                 className='inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition bg-white'
                 style={{
                   color: brand.primary,
                   border: `1px solid ${brand.primary}66`
                 }}
               >
-                Contact Team
+                Learn About BTEC
               </Link>
             </div>
           </div>

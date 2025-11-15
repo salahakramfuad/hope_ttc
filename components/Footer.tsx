@@ -275,15 +275,15 @@ export default function Footer() {
             <Link href='/terms' className='hover:text-gray-900'>
               Terms
             </Link>
+
+            {/* NEW: Developed by link */}
             <a
-              href='mailto:info@hopettc.com'
-              className='inline-flex items-center gap-2 hover:text-gray-900'
+              href='https://salahakramfuad.vercel.app'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='hover:text-gray-900'
             >
-              <span
-                className='h-1.5 w-1.5 rounded-full'
-                style={{ backgroundColor: BRAND.base }}
-              />
-              info@hopettc.com
+              Developed by <span className='font-semibold'>Mohammad Salah</span>
             </a>
           </div>
         </div>

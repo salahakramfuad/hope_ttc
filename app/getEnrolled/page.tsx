@@ -216,13 +216,14 @@ export default function GetEnrolledPage() {
                       className='block font-medium text-slate-700 mb-1'
                       htmlFor='phone'
                     >
-                      Phone Number
+                      Phone Number <span className='text-sky-600'>*</span>
                     </label>
                     <input
                       className='w-full border border-sky-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-sky-400'
                       type='tel'
                       id='phone'
                       name='phone'
+                      required
                       placeholder='01XXXXXXXXX'
                       inputMode='tel'
                       pattern='^0[0-9]{10}$'

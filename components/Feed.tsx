@@ -1,10 +1,12 @@
 // app/page.tsx
 'use client'
 import Image from 'next/image'
-import Link from 'next/link'
+
 import React from 'react'
 import { faker } from '@faker-js/faker'
 import HeroIllustration from './fun/animatedcard'
+import Link from 'next/link'
+import { MapPin } from 'lucide-react'
 
 /**
  * Enhanced elegant educational landing page
@@ -41,33 +43,48 @@ const HIGHLIGHTS = [
 
 const COURSES = [
   {
-    title: 'IELTS Express',
-    level: 'Fast Track',
-    blurb:
-      'High-impact strategies to push from 6.0 → 7.0+ with timed mocks & feedback.',
-    href: '/courses/ielts-express',
-    img: '/images/ielts-express.jpg'
-  },
-  {
-    title: 'IELTS Foundation',
-    level: 'Beginner–B1',
-    blurb: 'Grammar, vocabulary, and habits to build a rock-solid base.',
-    href: '/courses/ielts-foundation',
-    img: '/images/ielts-foundation.jpg'
-  },
-  {
     title: 'Spoken English',
     level: 'All Levels',
     blurb: 'Fluency drills, pronunciation labs, and real-life roleplays.',
-    href: '/speaking/basic-english-spoken',
+    href: '/courses/spokenenglish',
     img: '/images/spoken-english.jpg'
   },
+
+  // New: IELTS (general complete program)
   {
-    title: 'Essay Masterclass',
-    level: 'Writing',
-    blurb: 'Task 1/2 frameworks, cohesion, and band-7+ model answers.',
-    href: '/courses/writing-masterclass',
-    img: '/images/essay-masterclass.jpg'
+    title: 'IELTS Complete',
+    level: 'For All',
+    blurb:
+      'All four modules with section-wise strategies and weekly mock tests.',
+    href: '/courses/ielts',
+    img: '/images/ielts-complete.jpg'
+  },
+
+  // New: SAT
+  {
+    title: 'SAT Accelerator',
+    level: 'Hsc, A level',
+    blurb: 'Math + Evidence-Based Reading & Writing with exam-style drills.',
+    href: '/courses/sat',
+    img: '/images/sat-accelerator.jpg'
+  },
+
+  // New: BTECH
+  {
+    title: 'BTECH Foundation',
+    level: 'Coming Soon',
+    blurb: 'Core math, physics, and problem-solving for BTECH admissions.',
+    href: '/courses/btech',
+    img: '/images/btech-foundation.jpg'
+  },
+
+  // New: Robotics
+  {
+    title: 'Robotics & STEM Lab',
+    level: 'Junior–Senior',
+    blurb: 'Hands-on projects with sensors, coding, and simple robots.',
+    href: '/courses/robotics',
+    img: '/images/robotics-stem-lab.jpg'
   }
 ]
 
@@ -229,7 +246,7 @@ export default function HomePage() {
               <div className='inline-flex items-center gap-2 rounded-full bg-white/90 border border-teal-200/60 px-4 py-2 shadow-sm'>
                 <span className='w-2 h-2 rounded-full bg-teal-500 animate-pulse' />
                 <span className='text-sm font-medium text-slate-700'>
-                  Bangladesh Premier IELTS Institute
+                  Bangladesh&apos;s Premier IELTS Institute
                 </span>
               </div>
 
@@ -269,11 +286,11 @@ export default function HomePage() {
 
               <div className='flex flex-wrap gap-4'>
                 <Link
-                  href='/interested/form/combo-ielts-express'
+                  href='/getEnrolled'
                   className='group inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-white bg-linear-to-r from-teal-600 to-sky-600 hover:from-teal-700 hover:to-sky-700 shadow-lg hover:shadow-xl transition-all duration-300'
                   aria-label='Book a free consultation'
                 >
-                  Book Free Consultation
+                  Enroll Now
                   <span className='transition-transform group-hover:translate-x-1'>
                     →
                   </span>
@@ -342,7 +359,7 @@ export default function HomePage() {
         <SectionTitle
           eyebrow='Our Programs'
           title='Choose Your Learning Path'
-          desc='From absolute beginners to band-8 achievers — discover courses designed for your goals.'
+          desc='Discover courses designed for your goals.'
           size='lg'
         />
         <div className='mx-auto mt-16 max-w-7xl px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6'>
@@ -616,46 +633,66 @@ export default function HomePage() {
       </section>
 
       {/* Campuses */}
-      <section className='py-20 md:py-28'>
+      <section className='relative py-20 md:py-28'>
+        {/* soft background frame */}
+        <div className='pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-sky-50/70 via-white to-slate-50' />
+        <div
+          className='pointer-events-none absolute inset-x-6 inset-y-10 -z-10 rounded-3xl border border-slate-200/60 bg-white/40 shadow-[0_24px_80px_rgba(15,23,42,0.10)]'
+          aria-hidden='true'
+        />
+
         <SectionTitle
           eyebrow='Visit Us'
           title='Modern Campuses in Dhaka'
           desc='Bright classrooms, speaking labs, and dedicated mock centers.'
           size='lg'
         />
-        <div className='mx-auto mt-14 max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-6'>
-          {[
-            {
-              name: 'Uttara Campus',
-              addr: 'Plot 7, Road 6, Sector 4, Uttara, Dhaka',
-              imgAlt: 'Uttara Campus',
-              img: '/images/campus-uttara.jpg'
-            },
-            {
-              name: 'Dhanmondi Campus',
-              addr: 'House 12, Road 5, Dhanmondi, Dhaka',
-              imgAlt: 'Dhanmondi Campus',
-              img: '/images/campus-dhanmondi.jpg'
-            }
-          ].map((c) => (
-            <Card key={c.name} className='overflow-hidden'>
-              <div className='aspect-video'>
+
+        <div className='mx-auto mt-14 max-w-4xl px-4 sm:px-6 lg:px-8'>
+          <Card className='group relative overflow-hidden border border-slate-200/80 bg-white/90 shadow-sm transition hover:-translate-y-1 hover:border-sky-300/80 hover:shadow-xl focus-within:ring-2 focus-within:ring-sky-400/70'>
+            <Link href='/campus/uttara' className='flex h-full flex-col'>
+              <div className='relative aspect-video overflow-hidden'>
                 <SafeImage
-                  src={c.img}
-                  alt={c.imgAlt}
-                  className='w-full h-full object-cover'
+                  src='/images/campus-uttara.jpg'
+                  alt='Uttara Campus'
+                  className='h-full w-full object-cover transition duration-500 group-hover:scale-105 group-hover:brightness-105'
                   width={800}
                   height={450}
                   sizes='(max-width: 1024px) 100vw, 50vw'
                   preferPlaceholder
                 />
+                {/* overlay + tag */}
+                <div className='pointer-events-none absolute inset-0 bg-linear-to-t from-slate-950/55 via-slate-900/10 to-transparent opacity-90' />
+                <span className='absolute left-4 top-4 inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-medium uppercase tracking-wide text-slate-900 shadow-sm'>
+                  Flagship Campus
+                </span>
               </div>
-              <div className='p-6'>
-                <h3 className='font-bold text-lg text-slate-900'>{c.name}</h3>
-                <p className='mt-1 text-sm text-slate-600'>{c.addr}</p>
+
+              <div className='flex flex-1 flex-col justify-between p-6'>
+                <div>
+                  <h3 className='flex items-center gap-2 text-lg font-semibold text-slate-900'>
+                    <span className='inline-flex h-8 w-8 items-center justify-center rounded-full bg-sky-50 text-sky-700 ring-1 ring-sky-100'>
+                      <MapPin className='h-4 w-4' aria-hidden='true' />
+                    </span>
+                    <span>Uttara Campus</span>
+                  </h3>
+                  <p className='mt-2 text-sm text-slate-600'>
+                    Plot 7, Road 6, Sector 4, Uttara, Dhaka
+                  </p>
+                </div>
+
+                <div className='mt-4 inline-flex items-center text-sm font-medium text-sky-700'>
+                  <span className='relative'>
+                    View directions
+                    <span className='absolute inset-x-0 -bottom-0.5 h-px w-full origin-left scale-x-0 bg-sky-500 transition group-hover:scale-x-100' />
+                  </span>
+                  <span className='ml-1 transition-transform group-hover:translate-x-0.5'>
+                    →
+                  </span>
+                </div>
               </div>
-            </Card>
-          ))}
+            </Link>
+          </Card>
         </div>
       </section>
 
@@ -674,7 +711,7 @@ export default function HomePage() {
             </div>
             <div className='flex gap-3'>
               <Link
-                href='/apply'
+                href='/getEnrolled'
                 className='inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white bg-linear-to-r from-teal-600 to-sky-600 shadow hover:shadow-md transition-all'
               >
                 Apply Now
