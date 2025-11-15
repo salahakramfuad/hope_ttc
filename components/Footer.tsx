@@ -211,11 +211,11 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/courses/biotech'
+                    href='/courses/btech'
                     className='hover:underline hover:decoration-2'
                     style={{ textDecorationColor: BRAND.base }}
                   >
-                    Biotech
+                    BTECH
                   </Link>
                 </li>
               </ul>

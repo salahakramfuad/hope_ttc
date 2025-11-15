@@ -6,6 +6,11 @@ import Link from 'next/link'
 
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error'
 
+type EnrollResponse = {
+  ok?: boolean
+  error?: string
+}
+
 export default function GetEnrolledPage() {
   const [state, setState] = React.useState<SubmitState>('idle')
   const [error, setError] = React.useState<string | null>(null)
@@ -54,13 +59,21 @@ export default function GetEnrolledPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       })
-      const json: { ok?: boolean; error?: string } = await res.json()
-      if (!res.ok || !json.ok) throw new Error(json.error || 'Failed to send')
+
+      const json: EnrollResponse = await res.json().catch(() => ({}))
+
+      if (!res.ok || !json.ok) {
+        throw new Error(json.error || 'Failed to submit. Please try again.')
+      }
 
       form.reset()
       setState('success')
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Submission failed')
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Submission failed. Please try again.'
+      )
       setState('error')
     }
   }
@@ -187,7 +200,7 @@ export default function GetEnrolledPage() {
                       placeholder='you@example.com'
                       autoComplete='email'
                       inputMode='email'
-                      pattern='^[^@\s]+@[^@\s]+\.[^@\s]+$'
+                      pattern='^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$'
                       aria-describedby='email-hint'
                     />
                     <p id='email-hint' className='text-xs text-slate-500 mt-1'>
@@ -364,7 +377,7 @@ export default function GetEnrolledPage() {
                 {/* Inline status message just under the button */}
                 <div
                   ref={msgRef}
-                  className='min-h-1.25rem'
+                  className='min-h-[1.25rem]'
                   role='status'
                   aria-live='polite'
                 >
