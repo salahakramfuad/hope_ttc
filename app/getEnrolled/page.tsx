@@ -299,7 +299,7 @@ export default function GetEnrolledPage() {
                       defaultValue='uttara'
                     >
                       <option value='uttara'>Uttara</option>
-                      <option value='dhanmondi'>Dhanmondi</option>
+
                       <option value='online'>Online</option>
                     </select>
                   </div>

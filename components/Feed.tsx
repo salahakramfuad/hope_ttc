@@ -91,23 +91,43 @@ const COURSES = [
 const FEATURES = [
   {
     title: 'IDP-Aligned Mock Center',
-    desc: 'Timed mock tests, band-style grading, and analytics after every attempt.',
+    desc: 'Full-length computer-delivered mocks with band-style grading, answer review, and progress tracking after every attempt.',
     icon: '🎯'
   },
   {
-    title: 'Small Cohorts',
-    desc: '8–15 learners per batch for individual attention and faster progress.',
+    title: 'Small, Laser-Focused Cohorts',
+    desc: 'Only 8–15 learners per batch so teachers can track each learner’s gaps, homework, and speaking/writing improvement personally.',
     icon: '👥'
   },
   {
-    title: 'Speaking Clinics',
-    desc: '1:1 feedback with examiners, accent coaching, cue-card drills.',
+    title: 'Speaking & Interview Clinics',
+    desc: '1:1 feedback with trainers, accent and fluency coaching, cue-card drills, and simulated test-day interviews.',
     icon: '🎤'
   },
   {
-    title: 'Study Abroad Desk',
-    desc: 'Shortlist programs, prep documents, and track applications in one place.',
+    title: 'Study Abroad & Visa Desk',
+    desc: 'Shortlist programs, prepare SOPs and CVs, organize documents, and track university applications from one desk.',
     icon: '✈️'
+  },
+  {
+    title: 'Official Test-Prep Ecosystem',
+    desc: 'Dedicated labs, quiet exam-style rooms, and test-day walkthroughs designed to mirror real IELTS, SAT, MET, and OET conditions.',
+    icon: '🏛️'
+  },
+  {
+    title: 'Adaptive Study Plans',
+    desc: 'Diagnostic test, gap analysis, and weekly study plans so busy students and professionals know exactly what to do each day.',
+    icon: '📅'
+  },
+  {
+    title: 'Result-Focused Writing Support',
+    desc: 'Task 1 & 2 templates, model answers, and line-by-line feedback on your scripts until you consistently hit your target band/score.',
+    icon: '✍️'
+  },
+  {
+    title: 'Always-On Support',
+    desc: 'WhatsApp doubt-clearing, extra practice sets, and last-week revision help so you never feel stuck studying alone.',
+    icon: '🤝'
   }
 ]
 
@@ -297,7 +317,7 @@ export default function HomePage() {
                 </Link>
 
                 <Link
-                  href='/courses'
+                  href='#courses'
                   className='inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-semibold text-slate-700 bg-white border-2 border-slate-200 hover:border-teal-300 hover:bg-slate-50 shadow-sm hover:shadow transition-all duration-300'
                   aria-label='Explore courses'
                 >
@@ -355,7 +375,7 @@ export default function HomePage() {
       </section>
 
       {/* Courses */}
-      <section className='py-20 md:py-28'>
+      <section className='py-20 md:py-28' id='courses'>
         <SectionTitle
           eyebrow='Our Programs'
           title='Choose Your Learning Path'
@@ -402,24 +422,28 @@ export default function HomePage() {
       </section>
 
       {/* Features */}
-      <section className='py-20 md:py-28 bg-linear-to-b from-slate-50 to-white'>
+      <section className='py-20 md:py-28 bg-linear-to-b from-slate-50 via-white to-slate-50/60'>
         <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
           <SectionTitle
             eyebrow='Why Choose Us'
             title='Excellence in Every Detail'
-            desc='Real-world practice, personalized feedback, and proven methodologies for your success.'
+            desc='From test registration to result day, we guide you with real exam experience, structured practice, and personal coaching.'
             size='lg'
           />
+
           <div className='mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6'>
             {FEATURES.map((f) => (
               <Card
                 key={f.title}
-                className='p-7 hover:border-teal-200 transition-colors'
+                className='group relative h-full rounded-2xl border border-slate-100/80 bg-white/80 p-7 shadow-[0_18px_45px_rgba(15,23,42,0.06)] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-[0_24px_60px_rgba(15,23,42,0.12)]'
               >
-                <div className='h-14 w-14 rounded-2xl bg-linear-to-br from-teal-50 to-sky-50 border border-teal-100 flex items-center justify-center text-2xl shadow-sm'>
+                {/* Soft glow */}
+                <div className='pointer-events-none absolute inset-x-4 -top-4 h-8 rounded-full bg-emerald-100/40 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100' />
+
+                <div className='h-14 w-14 rounded-2xl bg-linear-to-br from-emerald-50 to-sky-50 border border-emerald-100 flex items-center justify-center text-2xl shadow-sm'>
                   {f.icon}
                 </div>
-                <h3 className='mt-5 font-bold text-lg text-slate-900'>
+                <h3 className='mt-5 font-semibold text-lg text-slate-900'>
                   {f.title}
                 </h3>
                 <p className='mt-3 text-sm text-slate-600 leading-relaxed'>
@@ -439,7 +463,7 @@ export default function HomePage() {
           <SectionTitle
             eyebrow='What Sets Us Apart'
             title='The HOPE TTC Advantage'
-            desc='Advanced technology meets personalized attention for exceptional IELTS results.'
+            desc='Advanced technology meets personalized attention for exceptional test results at every level.'
             size='xl'
           />
 
@@ -456,7 +480,8 @@ export default function HomePage() {
                     </h3>
                     <p className='text-sm text-slate-600 leading-relaxed'>
                       Real-time dashboards visualizing your journey across all
-                      four skills with weekly milestones and expert feedback.
+                      four skills with weekly milestones, expert feedback, and
+                      clear band / score targets for IELTS, SAT, MET, and OET.
                     </p>
                   </div>
                 </div>
@@ -472,8 +497,10 @@ export default function HomePage() {
                       AI-Powered Assessments
                     </h3>
                     <p className='text-sm text-slate-600 leading-relaxed'>
-                      Instant analytics on grammar, coherence, and vocabulary
-                      aligned with official band descriptors.
+                      Instant analytics on grammar, coherence, vocabulary, and
+                      timing aligned with official descriptors—so you know
+                      exactly why your band or score is where it is, and how to
+                      move it up.
                     </p>
                   </div>
                 </div>
@@ -486,11 +513,30 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className='font-bold text-lg mb-2'>
-                      Exclusive IELTS Portal
+                      Exclusive IELTS & Test Portal
                     </h3>
                     <p className='text-sm text-slate-600 leading-relaxed'>
-                      24/7 access to mocks, model answers, cue-card banks, and
-                      personalized study materials.
+                      24/7 access to mocks, model answers, cue-card banks,
+                      SAT-style practice sets, MET/OET resources, and
+                      personalized study materials in one secure portal.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className='p-8 hover:shadow-xl transition-shadow'>
+                <div className='flex items-start gap-4'>
+                  <div className='shrink-0 w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-xl'>
+                    🏛️
+                  </div>
+                  <div>
+                    <h3 className='font-bold text-lg mb-2'>
+                      Exam-Style Labs & Test-Day Support
+                    </h3>
+                    <p className='text-sm text-slate-600 leading-relaxed'>
+                      Dedicated computer labs, quiet exam rooms, registration
+                      support, and test-day walkthroughs designed to mirror the
+                      real IELTS, SAT, MET, and OET experience.
                     </p>
                   </div>
                 </div>
@@ -502,7 +548,7 @@ export default function HomePage() {
                 <div className='aspect-video rounded-xl overflow-hidden border border-white/60 shadow-lg mb-6'>
                   <SafeImage
                     src='/images/portal-preview.jpg'
-                    alt='HOPE TTC IELTS Portal'
+                    alt='HOPE TTC IELTS & Test Portal'
                     className='w-full h-full object-cover'
                     width={600}
                     height={400}
@@ -510,25 +556,30 @@ export default function HomePage() {
                     preferPlaceholder
                   />
                 </div>
-                <h3 className='text-xl font-bold mb-4'>
-                  Your Complete IELTS Command Center
+                <h3 className='text-xl font-bold mb-2'>
+                  Your Complete Test Command Center
                 </h3>
+                <p className='text-sm text-slate-600 mb-4'>
+                  One portal for everything: practice, analytics, and official
+                  exam support for IELTS, SAT, MET, and OET—built for busy
+                  students and professionals.
+                </p>
                 <ul className='space-y-3 text-sm text-slate-700'>
                   <li className='flex items-center gap-2'>
                     <span className='text-teal-600'>✓</span> Timed mock tests
-                    with instant band analytics
+                    with instant band / score analytics
                   </li>
                   <li className='flex items-center gap-2'>
                     <span className='text-teal-600'>✓</span> Speaking practice
                     with AI feedback & voice recording
                   </li>
                   <li className='flex items-center gap-2'>
-                    <span className='text-teal-600'>✓</span> Writing Task 1 & 2
-                    model libraries
+                    <span className='text-teal-600'>✓</span> Writing Task
+                    libraries, SAT essays & MET/OET writing samples
                   </li>
                   <li className='flex items-center gap-2'>
                     <span className='text-teal-600'>✓</span> Progress tracking
-                    across all four skills
+                    across all four skills and all test formats
                   </li>
                 </ul>
                 <div className='mt-8'>

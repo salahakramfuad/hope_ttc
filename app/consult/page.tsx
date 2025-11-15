@@ -371,10 +371,7 @@ export default function AcademicAdvisingPage() {
       </div>
 
       {/* Calendly script */}
-      <Script
-        src='https://assets.calendly.com/assets/external/widget.js'
-        strategy='lazyOnload'
-      />
+      <Script src='https://assets.calendly.com/assets/external/widget.js' />
     </main>
   )
 }
