@@ -160,6 +160,7 @@ export default function RoboticsPage() {
     <main className='min-h-screen bg-purple-50 text-[15px]'>
       {/* HERO */}
       <section aria-labelledby='robotics-hero' className='relative isolate'>
+        {/* Background image */}
         <div className='absolute inset-0 -z-10 overflow-hidden rounded-b-[28px]'>
           <Image
             src='/images/robotics.jpg'
@@ -169,10 +170,12 @@ export default function RoboticsPage() {
             className='object-cover'
             style={{ objectPosition: 'center' }}
           />
+          {/* Dark overlay for readability */}
+          <div className='absolute inset-0 bg-gradient-to-tr from-black/80 via-black/60 to-black/30' />
         </div>
 
         <div className='mx-auto max-w-6xl px-6 pt-20 pb-16 text-white'>
-          <div className='max-w-3xl'>
+          <div className='max-w-3xl drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]'>
             <h1
               id='robotics-hero'
               className='text-4xl md:text-5xl font-semibold tracking-tight'
@@ -187,15 +190,15 @@ export default function RoboticsPage() {
             </p>
             <div className='mt-6 flex flex-wrap gap-3'>
               <Link
-                href='/get-enrolled'
-                className='inline-flex items-center rounded-xl px-5 py-3 font-medium text-white'
+                href='/getEnrolled'
+                className='inline-flex items-center rounded-xl px-5 py-3 font-medium text-white shadow-lg shadow-black/40'
                 style={{ backgroundColor: brand.primary }}
               >
                 Enroll Now
               </Link>
               <Link
                 href='#why-robotics'
-                className='inline-flex items-center rounded-xl border px-5 py-3 font-medium'
+                className='inline-flex items-center rounded-xl border px-5 py-3 font-medium bg-white/5 backdrop-blur-sm'
                 style={{ borderColor: 'rgba(255,255,255,0.55)' }}
               >
                 Why Robotics?

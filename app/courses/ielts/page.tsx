@@ -110,7 +110,7 @@ export default function IELTSPage() {
             </p>
             <div className='mt-6 flex flex-wrap gap-3'>
               <Link
-                href='/contact'
+                href='/consult'
                 className='inline-flex items-center rounded-xl px-5 py-3 font-medium text-white'
                 style={{ backgroundColor: brand.primary }}
               >
