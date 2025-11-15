@@ -235,7 +235,7 @@ export default function AcademicAdvisingPage() {
             {/* 🔽 Your inline Calendly widget with custom colors */}
             <div
               className='calendly-inline-widget'
-              data-url='https://calendly.com/fuadturkish?background_color=d3d3d3&text_color=000000&primary_color=9f91a3'
+              data-url='https://calendly.com/fuadturkish?background_color=f0fdfa&text_color=0f172aprimary_color=0ea5e9'
               style={{ minWidth: '320px', height: '700px' }}
             />
           </div>

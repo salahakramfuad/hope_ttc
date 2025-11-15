@@ -302,7 +302,7 @@ export default function IELTSPage() {
           </p>
           <div className='mt-4'>
             <Link
-              href='/contact'
+              href='/consult'
               className='inline-flex items-center rounded-xl px-4 py-2 font-medium text-white'
               style={{ backgroundColor: brand.primary }}
             >

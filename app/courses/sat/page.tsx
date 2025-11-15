@@ -120,7 +120,7 @@ export default function SATPage() {
             </p>
             <div className='mt-6 flex flex-wrap gap-3'>
               <Link
-                href='/contact'
+                href='/consult'
                 className='inline-flex items-center rounded-xl px-5 py-3 font-medium text-white'
                 style={{ backgroundColor: brand.primary }}
               >
@@ -309,7 +309,7 @@ export default function SATPage() {
           </p>
           <div className='mt-4'>
             <Link
-              href='/contact'
+              href='/consult'
               className='inline-flex items-center rounded-xl px-4 py-2 font-medium text-white'
               style={{ backgroundColor: brand.primary }}
             >

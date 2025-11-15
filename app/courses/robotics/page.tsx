@@ -385,7 +385,7 @@ export default function RoboticsPage() {
         </div>
         <div className='mt-8 text-center'>
           <Link
-            href='/get-enrolled'
+            href='/getEnrolled'
             className='inline-flex items-center rounded-xl px-5 py-3 font-medium text-white'
             style={{ backgroundColor: brand.primary }}
           >
