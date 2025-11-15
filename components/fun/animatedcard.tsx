@@ -1,23 +1,49 @@
+'use client'
+
+import { motion } from 'framer-motion'
+
 export default function HeroIllustration() {
   return (
     <div className='relative w-full h-full min-h-[520px] antialiased'>
-      <div className='relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-amber-200/60 shadow-[0_20px_60px_rgba(245,158,11,0.12)] dark:border-white/10'>
+      <motion.div
+        className='relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-amber-200/60 shadow-[0_20px_60px_rgba(245,158,11,0.12)] dark:border-white/10'
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+      >
         {/* Soft backdrop */}
         <div className='relative h-[520px] bg-[radial-gradient(80%_60%_at_50%_20%,#fff7ed,transparent_70%)] dark:bg-[radial-gradient(80%_60%_at_50%_20%,#0b1220,transparent_70%)]'>
           {/* Subtle grid noise */}
-          <div
+          <motion.div
             aria-hidden
             className='pointer-events-none absolute inset-0 opacity-[0.05] dark:opacity-[0.08]'
             style={{
               backgroundImage:
                 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 1px)',
               backgroundSize: '22px 22px',
-              color: 'rgb(15 23 42)' // slate-900-ish; dark mode handled by opacity
+              color: 'rgb(15 23 42)'
+            }}
+            animate={{
+              backgroundPosition: ['0px 0px', '14px 8px', '0px 0px']
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: 'easeInOut'
             }}
           />
 
           {/* Center badge */}
-          <div className='absolute inset-0 m-auto h-[280px] w-[280px] rounded-full border border-amber-200/60 bg-white/40 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:bg-white/5 dark:border-white/15' />
+          <motion.div
+            className='absolute inset-0 m-auto h-[280px] w-[280px] rounded-full border border-amber-200/60 bg-white/40 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:bg-white/5 dark:border-white/15'
+            animate={{ scale: [1, 1.04, 1] }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              repeatType: 'mirror',
+              ease: 'easeInOut'
+            }}
+          />
 
           {/* Cards */}
           <div className='absolute inset-0'>
@@ -29,6 +55,7 @@ export default function HeroIllustration() {
                   text='Interactive sessions with expert tutors'
                   accent='from-rose-50 to-amber-50 dark:from-white/5 dark:to-white/0'
                   pillBg='bg-rose-100 text-rose-900 dark:bg-white/10 dark:text-white'
+                  floatDelay={0}
                 />
               </div>
               <div className='basis-[36%]'>
@@ -39,6 +66,7 @@ export default function HeroIllustration() {
                   accent='from-amber-50 to-sky-50 dark:from-white/5 dark:to-white/0'
                   pillBg='bg-amber-100 text-amber-900 dark:bg-white/10 dark:text-white'
                   featured
+                  floatDelay={0.15}
                 />
               </div>
               <div className='hidden md:block basis-[32%]'>
@@ -48,6 +76,7 @@ export default function HeroIllustration() {
                   text='Application-to-visa guidance'
                   accent='from-sky-50 to-rose-50 dark:from-white/5 dark:to-white/0'
                   pillBg='bg-sky-100 text-sky-900 dark:bg-white/10 dark:text-white'
+                  floatDelay={0.3}
                 />
               </div>
             </div>
@@ -55,34 +84,56 @@ export default function HeroIllustration() {
 
           {/* Footer ribbon */}
           <div className='absolute inset-x-0 bottom-6'>
-            <div className='mx-auto w-fit rounded-full border border-amber-200/60 bg-white/70 px-4 py-1.5 text-[12px] font-semibold tracking-wide text-amber-900 backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-white/90'>
+            <motion.div
+              className='mx-auto w-fit rounded-full border border-amber-200/60 bg-white/70 px-4 py-1.5 text-[12px] font-semibold tracking-wide text-amber-900 backdrop-blur dark:border-white/10 dark:bg-white/10 dark:text-white/90'
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.4, ease: 'easeOut' }}
+            >
               Hope TTC — Learn · Practice · Shine ✨
-            </div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }
 
-/* ---------- Elegant Card (simplified) ---------- */
-function ElegantCard({
-  emoji,
-  title,
-  text,
-  accent = 'from-amber-50 to-rose-50',
-  pillBg = 'bg-amber-100 text-amber-900',
-  featured = false
-}: {
+/* ---------- Elegant Card (animated) ---------- */
+type ElegantCardProps = {
   emoji: string
   title: string
   text: string
   accent?: string
   pillBg?: string
   featured?: boolean
-}) {
+  floatDelay?: number
+}
+
+function ElegantCard({
+  emoji,
+  title,
+  text,
+  accent = 'from-amber-50 to-rose-50',
+  pillBg = 'bg-amber-100 text-amber-900',
+  featured = false,
+  floatDelay = 0
+}: ElegantCardProps) {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: [18, 0, -4, 0] }}
+      transition={{
+        duration: 5,
+        ease: 'easeInOut',
+        delay: 0.2 + floatDelay,
+        repeat: Infinity,
+        repeatDelay: 2
+      }}
+      whileHover={{
+        y: -8,
+        scale: 1.03
+      }}
       className={[
         'relative h-full min-h-[160px] rounded-2xl border bg-white/70 p-4 backdrop-blur-md',
         'border-amber-100/70 shadow-[0_10px_30px_rgba(245,158,11,0.10)]',
@@ -118,6 +169,6 @@ function ElegantCard({
           {text}
         </p>
       </div>
-    </div>
+    </motion.div>
   )
 }
