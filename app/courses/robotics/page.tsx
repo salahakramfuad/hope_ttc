@@ -224,7 +224,7 @@ export default function RoboticsPage() {
             title='School & College Students'
             points={[
               'Want a serious STEM project for portfolio / admission',
-              'Curious about hardware, coding, and competitions',
+              'Curious about electronics, coding, and competitions',
               'Prefer learning by building, testing, and iterating'
             ]}
           />
