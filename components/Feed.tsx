@@ -703,7 +703,7 @@ export default function HomePage() {
                 desc: 'High-stakes English test for study, work and migration worldwide.',
                 img: '/images/exams/ielts.png',
                 imgAlt: 'IELTS logo',
-                link: 'https://ielts.org/`'
+                link: 'https://ielts.org/'
               },
               {
                 slug: 'sat',
@@ -737,43 +737,40 @@ export default function HomePage() {
                 key={exam.slug}
                 className='group relative h-full overflow-hidden border border-slate-200/80 bg-white/90 shadow-sm transition hover:-translate-y-1 hover:border-sky-300/80 hover:shadow-xl focus-within:ring-2 focus-within:ring-sky-400/70'
               >
-                <Link
-                  href={`${exam.link}`}
-                  className='flex h-full flex-col p-5'
-                >
-                  {/* Logo + code/label */}
-                  <div className='mb-3 flex items-center gap-3'>
-                    <div className='relative h-10 w-10 overflow-hidden rounded-xl bg-slate-50 ring-1 ring-slate-200'>
-                      <Image
-                        src={exam.img}
-                        alt={exam.imgAlt}
-                        fill
-                        sizes='40px'
-                        className='object-contain p-1.5'
-                      />
-                    </div>
-                    <div>
-                      <div className='inline-flex items-center gap-2'>
-                        <span className='inline-flex h-7 min-w-10 items-center justify-center rounded-full bg-sky-50 px-3 text-[11px] font-semibold tracking-wide text-sky-700 ring-1 ring-sky-100'>
-                          {exam.code}
-                        </span>
-                        <span className='text-sm font-semibold text-slate-900'>
-                          {exam.label}
-                        </span>
-                      </div>
-                    </div>
+                <Link href={exam.link} className='flex h-full flex-col'>
+                  {/* Top: full logo area */}
+                  <div className='flex h-24 items-center justify-center bg-white'>
+                    <Image
+                      src={exam.img}
+                      alt={exam.imgAlt}
+                      width={180}
+                      height={72}
+                      className='object-contain max-h-16 w-auto'
+                    />
                   </div>
 
-                  <p className='text-sm text-slate-600 flex-1'>{exam.desc}</p>
+                  {/* Body */}
+                  <div className='flex flex-1 flex-col p-5'>
+                    <div className='mb-2 inline-flex items-center gap-2'>
+                      <span className='inline-flex h-7 min-w-10 items-center justify-center rounded-full bg-sky-50 px-3 text-[11px] font-semibold tracking-wide text-sky-700 ring-1 ring-sky-100'>
+                        {exam.code}
+                      </span>
+                      <span className='text-sm font-semibold text-slate-900'>
+                        {exam.label}
+                      </span>
+                    </div>
 
-                  <div className='mt-4 inline-flex items-center text-sm font-medium text-sky-700'>
-                    <span className='relative'>
-                      Learn more
-                      <span className='absolute inset-x-0 -bottom-0.5 h-px w-full origin-left scale-x-0 bg-sky-500 transition group-hover:scale-x-100' />
-                    </span>
-                    <span className='ml-1 transition-transform group-hover:translate-x-0.5'>
-                      →
-                    </span>
+                    <p className='flex-1 text-sm text-slate-600'>{exam.desc}</p>
+
+                    <div className='mt-4 inline-flex items-center text-sm font-medium text-sky-700'>
+                      <span className='relative'>
+                        Learn more
+                        <span className='absolute inset-x-0 -bottom-0.5 h-px w-full origin-left scale-x-0 bg-sky-500 transition group-hover:scale-x-100' />
+                      </span>
+                      <span className='ml-1 transition-transform group-hover:translate-x-0.5'>
+                        →
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </Card>

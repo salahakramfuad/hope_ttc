@@ -278,7 +278,7 @@ export default function Footer() {
 
             {/* NEW: Developed by link */}
             <a
-              href='https://salahakramfuad.vercel.app'
+              href='https://www.linkedin.com/in/salahakramfuad/'
               target='_blank'
               rel='noopener noreferrer'
               className='hover:text-gray-900'
