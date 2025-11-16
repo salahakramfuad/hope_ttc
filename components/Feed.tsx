@@ -6,7 +6,6 @@ import React from 'react'
 import { faker } from '@faker-js/faker'
 import HeroIllustration from './fun/animatedcard'
 import Link from 'next/link'
-import { MapPin } from 'lucide-react'
 
 /**
  * Enhanced elegant educational landing page
