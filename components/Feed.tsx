@@ -265,7 +265,7 @@ export default function HomePage() {
               <div className='inline-flex items-center gap-2 rounded-full bg-white/90 border border-teal-200/60 px-4 py-2 shadow-sm'>
                 <span className='w-2 h-2 rounded-full bg-teal-500 animate-pulse' />
                 <span className='text-sm font-medium text-slate-700'>
-                  Bangladesh&apos;s Premier IELTS Institute
+                  Bangladesh&apos;s Premier Training and Testing Institute
                 </span>
               </div>
 
