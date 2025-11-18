@@ -83,7 +83,6 @@ export default function RadialCourseNetwork() {
 
   return (
     <section className='mx-auto max-w-6xl px-4 py-16'>
-      {/* Mobile grid */}
       <div className='grid gap-6 md:hidden'>
         <h2 className='mb-2 text-center text-2xl font-semibold text-[#11181C]'>
           Courses
