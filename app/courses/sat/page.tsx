@@ -128,7 +128,7 @@ export default function SATPage() {
               </Link>
               <a
                 href='#pricing'
-                className='inline-flex items-center rounded-xl border px-5 py-3 font-medium'
+                className='inline-flex items-center rounded-xl border px-5 py-3 font-medium bg-white'
                 style={{ borderColor: 'rgba(255,255,255,0.55)' }}
               >
                 View Pricing

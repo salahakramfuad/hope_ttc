@@ -198,7 +198,7 @@ export default function RoboticsPage() {
               </Link>
               <Link
                 href='#why-robotics'
-                className='inline-flex items-center rounded-xl border px-5 py-3 font-medium bg-white/5 backdrop-blur-sm'
+                className='inline-flex items-center rounded-xl border px-5 py-3 font-medium bg-white backdrop-blur-sm'
                 style={{ borderColor: 'rgba(255,255,255,0.55)' }}
               >
                 Why Robotics?
