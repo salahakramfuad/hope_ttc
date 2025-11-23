@@ -66,20 +66,33 @@ export default function Nav() {
   )
 
   // Close dropdowns / drawer on outside click & ESC
+
   useEffect(() => {
     const onDocMouseDown = (e: MouseEvent) => {
       const t = e.target as Node
       const insideNav = navRef.current?.contains(t)
       const insideDrawer = drawerRef.current?.contains(t)
-      if (!insideNav) setDropdownOpenIdx(null)
-      if (isDrawerOpen && !insideDrawer) setIsDrawerOpen(false)
+
+      // desktop dropdown: close if click is outside the nav bar
+      if (!insideNav) {
+        setDropdownOpenIdx(null)
+      }
+
+      // 🔐 drawer: close on ANY click that is not inside the drawer
+      if (isDrawerOpen && !insideDrawer) {
+        setIsDrawerOpen(false)
+        setMobileDropdownOpenIdx(null)
+      }
     }
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setDropdownOpenIdx(null)
         setIsDrawerOpen(false)
+        setMobileDropdownOpenIdx(null)
       }
     }
+
     document.addEventListener('mousedown', onDocMouseDown)
     document.addEventListener('keydown', onKey)
     return () => {

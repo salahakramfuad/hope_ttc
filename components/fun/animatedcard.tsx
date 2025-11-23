@@ -1,14 +1,6 @@
 'use client'
 
-import { motion, type Transition } from 'framer-motion'
-
-const floatTransition: Transition = {
-  duration: 5,
-  // cubic-bezier-ish easeInOut
-  ease: [0.45, 0, 0.55, 1],
-  repeat: Infinity,
-  repeatType: 'mirror'
-}
+import { motion } from 'framer-motion'
 
 export default function HeroIllustration() {
   return (
@@ -31,38 +23,28 @@ export default function HeroIllustration() {
             }}
           />
 
-          {/* Subtle animated grid */}
-          <motion.div
+          {/* Subtle static grid (no animation) */}
+          <div
             aria-hidden
-            className='pointer-events-none absolute inset-0 opacity-[0.08] dark:opacity-[0.18]'
+            className='pointer-events-none absolute inset-0 opacity-[0.06] dark:opacity-[0.14]'
             style={{
               backgroundImage:
                 'radial-gradient(circle at 1px 1px, rgba(15,23,42,0.7) 1px, transparent 1px)',
               backgroundSize: '22px 22px'
             }}
-            animate={{
-              backgroundPosition: ['0px 0px', '14px 8px', '0px 0px']
-            }}
-            transition={{
-              duration: 26,
-              repeat: Infinity,
-              ease: 'easeInOut'
-            }}
           />
 
-          {/* Orbit rings */}
-          <motion.div
+          {/* Orbit ring (static now) */}
+          <div
             aria-hidden
             className='absolute inset-0 m-auto h-[360px] w-[360px] rounded-full border border-amber-200/40 dark:border-amber-400/20'
             style={{
               boxShadow:
                 '0 0 120px rgba(251,191,36,0.45), 0 0 220px rgba(56,189,248,0.3)'
             }}
-            animate={{ rotate: [0, 12, 0] }}
-            transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
           />
 
-          {/* Core badge */}
+          {/* Core badge (single gentle pulse) */}
           <motion.div
             className='absolute inset-0 m-auto h-[260px] w-[260px] rounded-full border border-white/70 bg-white/60 backdrop-blur-xl shadow-[0_18px_70px_rgba(15,23,42,0.18)] dark:bg-white/5 dark:border-white/15'
             animate={{ scale: [1, 1.04, 1] }}
@@ -76,10 +58,10 @@ export default function HeroIllustration() {
               <span className='text-[11px] font-semibold uppercase tracking-[0.22em] text-amber-700/90 dark:text-amber-200/80'>
                 Premium IELTS & SAT Prep
               </span>
-s            </div>
+            </div>
           </motion.div>
 
-          {/* Floating accent chips */}
+          {/* Floating accent chips (only entrance animation) */}
           <motion.div
             className='absolute left-8 top-10 hidden text-[11px] md:flex'
             initial={{ opacity: 0, x: -20, y: -10 }}
@@ -172,6 +154,7 @@ s            </div>
             </motion.div>
           </div>
 
+          {/* Light sparkles */}
           <SparkleDot className='left-10 top-1/2' delay={0.2} />
           <SparkleDot className='right-16 top-1/3' delay={0.6} />
           <SparkleDot className='left-1/2 bottom-10' delay={1} />
@@ -214,10 +197,11 @@ function ElegantCard({
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: [18, 0, -4, 0] }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{
-        ...floatTransition,
-        delay: 0.3 + (floatDelay || 0)
+        duration: 0.6,
+        delay: 0.3 + (floatDelay || 0),
+        ease: 'easeOut'
       }}
       whileHover={{
         y: -10,
@@ -244,7 +228,7 @@ function ElegantCard({
         <div className='mb-2.5 flex items-center gap-2'>
           <div
             className={[
-              'flex h-10 w-10 items-center justifyCenter rounded-full text-base shadow-sm',
+              'flex h-10 w-10 items-center justify-center rounded-full text-base shadow-sm',
               pillBg
             ].join(' ')}
           >

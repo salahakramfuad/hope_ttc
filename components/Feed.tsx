@@ -622,94 +622,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Testimonials */}
-      <section className='py-20 md:py-28'>
-        <SectionTitle
-          eyebrow='Student Success'
-          title='Real Results, Real Stories'
-          desc='Hear from students who achieved their dream scores with HOPE TTC.'
-          size='lg'
-        />
-        <div className='mx-auto mt-16 max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6'>
-          {TESTIMONIALS.map((t) => (
-            <Card
-              key={t.name}
-              className='p-8 hover:shadow-xl transition-shadow'
-            >
-              <div className='flex items-center gap-4 mb-4'>
-                <SafeImage
-                  src={t.img}
-                  alt={t.name}
-                  className='h-14 w-14 rounded-full object-cover ring-2 ring-teal-100'
-                  width={56}
-                  height={56}
-                  preferPlaceholder
-                />
-                <div>
-                  <div className='font-bold text-slate-900'>{t.name}</div>
-                  <div className='text-sm font-semibold text-teal-600'>
-                    {t.score}
-                  </div>
-                </div>
-              </div>
-              <p className='text-sm text-slate-600 leading-relaxed italic'>
-                {t.quote}
-              </p>
-            </Card>
-          ))}
-        </div>
-      </section>
-      {/* FAQ */}
-      <section className='py-20 md:py-28 bg-linear-to-b from-slate-50 to-white'>
-        <SectionTitle
-          eyebrow='Common Questions'
-          title='Everything You Need to Know'
-          desc='Still have questions? Our advisors are here to help anytime.'
-          size='md'
-        />
-        <div className='mx-auto mt-12 max-w-3xl px-4 sm:px-6 lg:px-8'>
-          <div className='divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden'>
-            {[
-              {
-                q: 'Do you offer mock tests?',
-                a: 'Yes — weekly IDP-style mocks with band descriptors and detailed feedback from certified examiners.'
-              },
-              {
-                q: 'Can I switch batches?',
-                a: 'Absolutely. If your schedule changes, we help you shift to another batch with no additional fees.'
-              },
-              {
-                q: 'Is there a speaking clinic?',
-                a: 'Yes — personalized one-to-one sessions focusing on fluency, coherence, pronunciation, and confidence building.'
-              },
-              {
-                q: 'Do you provide study abroad support?',
-                a: 'Yes — from shortlisting to applications, SOPs, and visa guidance via our Study Abroad Desk.'
-              },
-              {
-                q: 'Are classes available online?',
-                a: 'We run both on-campus and live online cohorts. Choose what suits your routine best.'
-              }
-            ].map((item, i) => (
-              <details key={i} className='group'>
-                <summary className='cursor-pointer list-none p-6 font-semibold flex items-center justify-between hover:bg-slate-50 transition-colors'>
-                  <span className='text-slate-900'>{item.q}</span>
-                  <span className='text-2xl text-teal-600 leading-none group-open:rotate-45 transition-transform duration-300'>
-                    +
-                  </span>
-                </summary>
-                <div className='px-6 pb-6 text-sm text-slate-600 leading-relaxed'>
-                  {item.a}
-                </div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+
       {/* Exam Centre Highlight */}
-      <section className='relative py-20 md:py-28'>
+      <section className='relative py-20 md:py-28 bg-slate-50'>
         {/* soft background frame */}
-        <div className='pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-sky-50/70 via-white to-slate-50' />
+        <div className='pointer-events-none absolute inset-0 -z-10 bg-linear-to-b  from-slate-50 to-white' />
         <div
           className='pointer-events-none absolute inset-x-6 inset-y-10 -z-10 rounded-3xl border border-slate-200/60 bg-white/40 shadow-[0_24px_80px_rgba(15,23,42,0.10)]'
           aria-hidden='true'
@@ -810,6 +727,90 @@ export default function HomePage() {
             We are proud to serve as an official exam centre for IELTS, SAT, MET
             and OET in Dhaka.
           </p>
+        </div>
+      </section>
+      {/* Testimonials */}
+      <section className='py-20 md:py-28'>
+        <SectionTitle
+          eyebrow='Student Success'
+          title='Real Results, Real Stories'
+          desc='Hear from students who achieved their dream scores with HOPE TTC.'
+          size='lg'
+        />
+        <div className='mx-auto mt-16 max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6'>
+          {TESTIMONIALS.map((t) => (
+            <Card
+              key={t.name}
+              className='p-8 hover:shadow-xl transition-shadow'
+            >
+              <div className='flex items-center gap-4 mb-4'>
+                <SafeImage
+                  src={t.img}
+                  alt={t.name}
+                  className='h-14 w-14 rounded-full object-cover ring-2 ring-teal-100'
+                  width={56}
+                  height={56}
+                  preferPlaceholder
+                />
+                <div>
+                  <div className='font-bold text-slate-900'>{t.name}</div>
+                  <div className='text-sm font-semibold text-teal-600'>
+                    {t.score}
+                  </div>
+                </div>
+              </div>
+              <p className='text-sm text-slate-600 leading-relaxed italic'>
+                {t.quote}
+              </p>
+            </Card>
+          ))}
+        </div>
+      </section>
+      {/* FAQ */}
+      <section className='py-20 md:py-28 bg-linear-to-b from-sky-50/70 via-white to-slate-50 '>
+        <SectionTitle
+          eyebrow='Common Questions'
+          title='Everything You Need to Know'
+          desc='Still have questions? Our advisors are here to help anytime.'
+          size='md'
+        />
+        <div className='mx-auto mt-12 max-w-3xl px-4 sm:px-6 lg:px-8'>
+          <div className='divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden'>
+            {[
+              {
+                q: 'Do you offer mock tests?',
+                a: 'Yes — weekly IDP-style mocks with band descriptors and detailed feedback from certified examiners.'
+              },
+              {
+                q: 'Can I switch batches?',
+                a: 'Absolutely. If your schedule changes, we help you shift to another batch with no additional fees.'
+              },
+              {
+                q: 'Is there a speaking clinic?',
+                a: 'Yes — personalized one-to-one sessions focusing on fluency, coherence, pronunciation, and confidence building.'
+              },
+              {
+                q: 'Do you provide study abroad support?',
+                a: 'Yes — from shortlisting to applications, SOPs, and visa guidance via our Study Abroad Desk.'
+              },
+              {
+                q: 'Are classes available online?',
+                a: 'We run both on-campus and live online cohorts. Choose what suits your routine best.'
+              }
+            ].map((item, i) => (
+              <details key={i} className='group'>
+                <summary className='cursor-pointer list-none p-6 font-semibold flex items-center justify-between hover:bg-slate-50 transition-colors'>
+                  <span className='text-slate-900'>{item.q}</span>
+                  <span className='text-2xl text-teal-600 leading-none group-open:rotate-45 transition-transform duration-300'>
+                    +
+                  </span>
+                </summary>
+                <div className='px-6 pb-6 text-sm text-slate-600 leading-relaxed'>
+                  {item.a}
+                </div>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
     </main>
