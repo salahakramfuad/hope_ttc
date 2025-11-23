@@ -84,6 +84,36 @@ const COURSES = [
     blurb: 'Hands-on projects with sensors, coding, and simple robots.',
     href: '/courses/robotics',
     img: '/images/robotics-stem-lab.jpg'
+  },
+
+  // New: 3D Modelling
+  {
+    title: '3D Modelling & Animation',
+    level: 'Beginner–Advanced',
+    blurb:
+      'Blender-based 3D modelling, texturing, lighting, and animation with portfolio projects.',
+    href: '/courses/modelling',
+    img: '/images/3d-modelling.jpg'
+  },
+
+  // New: Game Development
+  {
+    title: 'Game Development',
+    level: 'Beginner–Intermediate',
+    blurb:
+      'Learn Unity-style game development, C# scripting, and build playable projects.',
+    href: '/courses/gamedev',
+    img: '/images/game-dev.jpg'
+  },
+
+  // New: Web Development
+  {
+    title: 'Web Development',
+    level: 'Beginner–Intermediate',
+    blurb:
+      'Modern HTML, CSS, JavaScript, React, and Next.js with deployed portfolio sites.',
+    href: '/courses/webdev',
+    img: '/images/web-dev.jpg'
   }
 ]
 

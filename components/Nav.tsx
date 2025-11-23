@@ -52,7 +52,10 @@ export default function Nav() {
           { title: 'SAT', href: '/courses/sat' },
           { title: 'BTECH', href: '/courses/btech' },
           { title: 'Spoken English', href: '/courses/spokenenglish' },
-          { title: 'Robotics', href: '/courses/robotics' }
+          { title: 'Robotics', href: '/courses/robotics' },
+          { title: 'Game Development', href: '/courses/gamedev' },
+          { title: 'Web Development', href: '/courses/webdev' },
+          { title: '3D Modelling', href: '/courses/modelling' }
         ]
       },
       { title: 'Study Overseas', href: '/studyOverseas' },
