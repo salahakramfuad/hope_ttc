@@ -223,7 +223,7 @@ export default function AcademicAdvisingPage() {
                 </div>
               </div>
               <Link
-                href='https://calendly.com/fuadturkish?background_color=d3d3d3&text_color=000000&primary_color=9f91a3'
+                href='https://calendly.com/hopettc-admission'
                 target='_blank'
                 className='inline-flex items-center rounded-full border px-3 py-1.5 text-[11px] font-medium backdrop-blur-sm hover:bg-white/80'
                 style={{ borderColor: brand.border, color: brand.subText }}
@@ -235,7 +235,7 @@ export default function AcademicAdvisingPage() {
             {/* 🔽 Your inline Calendly widget with custom colors */}
             <div
               className='calendly-inline-widget'
-              data-url='https://calendly.com/fuadturkish?background_color=f0fdfa&text_color=0f172aprimary_color=0ea5e9'
+              data-url='https://calendly.com/hopettc-admission'
               style={{ minWidth: '320px', height: '700px' }}
             />
           </div>
